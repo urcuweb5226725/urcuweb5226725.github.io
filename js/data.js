@@ -428,13 +428,15 @@ const SIGNAL_FEED = [
     { type: "squeeze", icon: "fa-fire-alt", title: "情绪背离：INTC 基本面改善但情绪极差", desc: "情绪评分仅 18 vs 基本面 62，可能存在反转机会", time: "6小时前" },
 ];
 
-// === CAN SLIM Data ===
+// === CAN SLIM Data (Enhanced with Narrative + N-Factor Authenticity) ===
 const CANSLIM_STOCKS = [
     {
         ticker: "NVDA", name: "NVIDIA Corp.", price: 875.50,
+        narrative: "就像2007年的苹果发布iPhone一样，NVDA正在定义一个全新的计算时代。不同的是，iPhone当时还没有盈利证明，而NVDA已经用265%的EPS增长证明了AI需求是真金白银。机构正在疯狂扫货（5200只基金持有），唯一需要等待的是大盘给出绿灯。",
+        historicalAnalogy: "类似 2004-2006 年的苹果：新产品周期开始 + 盈利爆发 + 机构蜂拥入场",
         C: { score: 95, epsGrowth: 265, detail: "当季EPS $5.16 vs 去年 $1.42，同比增长 265%。连续 4 季度加速增长。" },
         A: { score: 92, annualGrowth: [45, 62, 85, 122, 265], detail: "年度EPS: $2.1→$3.4→$6.3→$14.0→$20.8，5年复合增长58%。承诺兑现率: 92%。" },
-        N: { score: 88, events: ["Blackwell Ultra架构发布", "数据中心AI推理芯片需求爆发", "股价创历史新高"], detail: "Blackwell Ultra 架构代表 AI 芯片技术突破，AI 推理市场是全新增长引擎。近52周新高。" },
+        N: { score: 88, events: ["Blackwell Ultra架构发布", "数据中心AI推理芯片需求爆发", "股价创历史新高"], detail: "Blackwell Ultra 架构代表 AI 芯片技术突破，AI 推理市场是全新增长引擎。近52周新高。", authenticity: 92, authDetail: "真实性极高：Blackwell 芯片已有明确出货数据（Q4出货超预期15%），客户资本支出计划（MSFT/META/GOOGL合计$200B+）形成硬性需求验证。不是画饼，是已兑现的订单。" },
         S: { score: 82, volumeRatio: 1.8, floatShort: 1.2, detail: "近期成交量为50日均量的1.8倍，放量上涨。流通股空头占比仅1.2%，卖压极小。" },
         L: { score: 90, rsRating: 95, industryRank: 1, detail: "RS评级95（满分99），半导体行业排名第1。过去12个月跑赢95%的股票。" },
         I: { score: 88, fundCount: 5200, fundChange: "+180", detail: "5200只基金持有，较上季度增加180只。Citadel、Renaissance等顶级基金大幅增持。" },
@@ -443,9 +445,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "META", name: "Meta Platforms", price: 585.20,
+        narrative: "META就像一个从ICU里走出来的运动员——2022年差点被宣判死亡，现在反而比受伤前更强。AI广告推荐引擎不是空话，已经直接在财报中兑现为18%的广告增长。聪明钱（Bridgewater、Pershing Square）正在大举买入，这通常意味着\"跌无可跌，只剩上涨\"。",
+        historicalAnalogy: "类似 2013 年的 Netflix：从\"DVD公司\"到\"流媒体巨头\"的价值重估",
         C: { score: 85, epsGrowth: 35, detail: "当季EPS $6.20 vs 去年 $4.59，同比增长 35%。AI广告推荐引擎持续推动增长。" },
         A: { score: 88, annualGrowth: [-2, 15, 45, 72, 35], detail: "年度EPS从2022年低谷强劲反弹。5年EPS: $10.1→$8.6→$14.9→$22.1→$25.8。" },
-        N: { score: 82, events: ["Llama 4开源模型发布", "AI广告推荐系统升级", "Reels营收增速翻倍"], detail: "开源AI战略形成生态护城河，AI推荐系统是核心新产品驱动力。" },
+        N: { score: 82, events: ["Llama 4开源模型发布", "AI广告推荐系统升级", "Reels营收增速翻倍"], detail: "开源AI战略形成生态护城河，AI推荐系统是核心新产品驱动力。", authenticity: 78, authDetail: "中高真实性：AI广告推荐引擎已有明确营收贡献（+18%），但Llama开源模型的商业化路径仍不清晰。Reality Labs每季度$4B+亏损是真实风险。Reels增长是已验证的事实。" },
         S: { score: 78, volumeRatio: 1.3, floatShort: 0.8, detail: "成交量温和放大，流通股空头占比极低(0.8%)。股票回购减少了流通股供给。" },
         L: { score: 85, rsRating: 88, industryRank: 1, detail: "RS评级88，社交媒体行业领导者。过去12个月跑赢88%的股票。" },
         I: { score: 90, fundCount: 4800, fundChange: "+220", detail: "4800只基金持有，增加220只。Bridgewater、Pershing Square 等价值型基金新增持仓。" },
@@ -454,9 +458,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "TSM", name: "台积电 TSMC", price: 185.30,
+        narrative: "如果AI是新时代的石油，那台积电就是唯一的炼油厂。NVDA、苹果、AMD都得排队找它生产芯片——这种垄断地位比任何财务指标都重要。巴菲特都在买，5年后回头看今天的价格，可能就像2015年看亚马逊一样便宜。唯一的风险是地缘政治，但美国/日本建厂正在对冲这个风险。",
+        historicalAnalogy: "类似 2010 年代的 ASML：半导体不可替代的\"卖铲人\"",
         C: { score: 90, epsGrowth: 58, detail: "当季EPS同比增长58%，AI芯片代工需求爆发，先进制程(3nm/5nm)产能满载。" },
         A: { score: 85, annualGrowth: [25, -8, 18, 35, 58], detail: "2023年低谷后V型反弹。5年趋势：$5.2→$6.5→$5.9→$7.0→$9.5→$15.0。" },
-        N: { score: 92, events: ["2nm制程2025量产", "日本/美国建厂推进", "CoWoS先进封装产能扩张3倍"], detail: "2nm技术领先全球，CoWoS封装是AI芯片瓶颈的关键解决方案，属于革命性新产品。" },
+        N: { score: 92, events: ["2nm制程2025量产", "日本/美国建厂推进", "CoWoS先进封装产能扩张3倍"], detail: "2nm技术领先全球，CoWoS封装是AI芯片瓶颈的关键解决方案，属于革命性新产品。", authenticity: 95, authDetail: "真实性极高：2nm制程有明确的客户tape-out记录，CoWoS产能扩张有实际资本支出验证。日本熊本厂已投产，美国亚利桑那厂建设进度可通过卫星图验证。所有\"新\"都有实物证据。" },
         S: { score: 75, volumeRatio: 1.4, floatShort: 0.5, detail: "ADR成交量稳步增长，空头极少。但总流通股较大，不属于紧缺型。" },
         L: { score: 88, rsRating: 91, industryRank: 2, detail: "RS评级91，半导体行业第2（仅次于NVDA）。过去12个月跑赢91%的股票。" },
         I: { score: 92, fundCount: 2800, fundChange: "+150", detail: "2800只基金持有。Berkshire Hathaway、Tiger Global 均为重仓股。巴菲特的加持是重要信号。" },
@@ -465,9 +471,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "AVGO", name: "Broadcom Inc.", price: 195.80,
+        narrative: "AVGO做的事情很聪明：它不跟NVDA正面竞争卖通用GPU，而是帮Google和Meta量身定制专属AI芯片。这就像裁缝 vs 成衣店——虽然规模小，但利润率更高、客户粘性更强。再加上VMware这笔收购让它拥有了稳定的软件订阅收入，攻守兼备。",
+        historicalAnalogy: "类似 2015 年的 Adobe：从卖软件转向订阅制的价值跃升",
         C: { score: 88, epsGrowth: 45, detail: "当季EPS同比增长45%，AI网络芯片+VMware整合双轮驱动。" },
         A: { score: 82, annualGrowth: [12, 15, 22, 30, 45], detail: "年度EPS连续5年加速增长，收购VMware后软件业务占比提升至40%。" },
-        N: { score: 78, events: ["定制AI芯片(ASIC)获Google/Meta大单", "VMware云化整合", "近52周新高"], detail: "定制AI芯片业务是新的增长极，为科技巨头量身定制AI加速器。" },
+        N: { score: 78, events: ["定制AI芯片(ASIC)获Google/Meta大单", "VMware云化整合", "近52周新高"], detail: "定制AI芯片业务是新的增长极，为科技巨头量身定制AI加速器。", authenticity: 75, authDetail: "中高真实性：Google TPU和Meta MTIA的订单有财报验证，但具体金额未披露。VMware整合进度可通过客户续约率验证（目前良好）。ASIC业务的天花板尚不明确。" },
         S: { score: 72, volumeRatio: 1.2, floatShort: 1.5, detail: "成交量平稳，流通股供给因回购减少。但债务较高（VMware收购）。" },
         L: { score: 82, rsRating: 85, industryRank: 3, detail: "RS评级85，半导体行业第3。AI ASIC龙头地位巩固。" },
         I: { score: 85, fundCount: 3200, fundChange: "+95", detail: "3200只基金持有。定制AI芯片赛道获得越来越多长线基金关注。" },
@@ -476,9 +484,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "LLY", name: "Eli Lilly", price: 820.50,
+        narrative: "想象一下：全球有6.5亿肥胖人口，而LLY的减肥药是第一个真正有效的解决方案。这不是\"再来一个减肥概念\"——它已经让临床试验中的患者平均减重22%。现在它还在治疗糖尿病、睡眠呼吸暂停、甚至阿尔茨海默。这就像拥有一把万能钥匙，每开一扇门就是一个千亿市场。",
+        historicalAnalogy: "类似 1999 年的辉瑞发现万艾可：一个药物开启多个巨大市场",
         C: { score: 92, epsGrowth: 82, detail: "当季EPS同比增长82%，GLP-1减肥药Mounjaro/Zepbound销售爆发。" },
         A: { score: 78, annualGrowth: [8, -5, 12, 35, 82], detail: "2024年起因GLP-1药物进入指数级增长。年度EPS加速明显。" },
-        N: { score: 95, events: ["Zepbound获批新适应症(睡眠呼吸暂停)", "口服GLP-1进入III期临床", "阿尔茨海默药donanemab获批"], detail: "GLP-1赛道是近10年最大的医药创新。口服版GLP-1可能将市场扩大10倍。多个重磅新药同时推进。" },
+        N: { score: 95, events: ["Zepbound获批新适应症(睡眠呼吸暂停)", "口服GLP-1进入III期临床", "阿尔茨海默药donanemab获批"], detail: "GLP-1赛道是近10年最大的医药创新。口服版GLP-1可能将市场扩大10倍。多个重磅新药同时推进。", authenticity: 90, authDetail: "极高真实性：Mounjaro/Zepbound的销售数据是硬指标（季度$3B+），FDA已批准。口服版GLP-1 III期临床数据将在2026年Q2发布。donanemab已获FDA批准。唯一不确定性：产能能否跟上需求。" },
         S: { score: 70, volumeRatio: 1.1, floatShort: 0.8, detail: "成交量正常，流通股规模大。机构持仓集中度高。" },
         L: { score: 85, rsRating: 87, industryRank: 1, detail: "RS评级87，制药行业绝对领导者。GLP-1赛道无可争议的龙头。" },
         I: { score: 88, fundCount: 4100, fundChange: "+135", detail: "4100只基金持有，医疗基金几乎全部超配。" },
@@ -487,9 +497,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "PLTR", name: "Palantir Technologies", price: 78.50,
+        narrative: "PLTR是一只让人又爱又恨的股票。爱它是因为AIP平台确实在帮企业和政府部署AI——这是真需求。恨它是因为PE=180倍，社交媒体上满是MEME式喊单，内部人还在不断卖出。简单说：产品是好产品，但价格已经透支了太多未来。就像2000年的思科——公司是好公司，但估值太疯狂了。",
+        historicalAnalogy: "警示案例 — 类似 2000 年的 Cisco：伟大的公司，但在 PE=130 时买入仍亏了20年",
         C: { score: 75, epsGrowth: 42, detail: "当季EPS $0.11 vs 去年 $0.08，增长42%。但绝对值仍然较低。" },
         A: { score: 62, annualGrowth: [-100, -50, 5, 25, 42], detail: "刚从亏损转盈利不久，年度增长趋势向好但历史短。" },
-        N: { score: 85, events: ["AIP平台获大量企业客户", "政府AI安全合规领先", "获新军方合同"], detail: "AIP平台是企业AI部署的新范式，政府安全认证是独特护城河。" },
+        N: { score: 85, events: ["AIP平台获大量企业客户", "政府AI安全合规领先", "获新军方合同"], detail: "AIP平台是企业AI部署的新范式，政府安全认证是独特护城河。", authenticity: 60, authDetail: "中等真实性：AIP平台有客户案例但\"大量企业客户\"的说法缺乏具体数字（管理层回避披露AIP独立ARR）。政府合同是真实的但高度依赖政策。军方合同金额通常被夸大宣传。需要更多季度数据验证增长可持续性。" },
         S: { score: 55, volumeRatio: 2.2, floatShort: 3.5, detail: "成交量极高但内部人持续减持。空头占比3.5%值得关注。散户交易占比偏高。" },
         L: { score: 92, rsRating: 96, industryRank: 1, detail: "RS评级96，AI/数据分析行业第1。过去12个月涨幅185%。" },
         I: { score: 58, fundCount: 1800, fundChange: "+45", detail: "基金持仓在增加但增速放缓。高估值让很多价值型基金望而却步。" },
@@ -498,9 +510,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "CRWD", name: "CrowdStrike", price: 345.20,
+        narrative: "还记得2024年那次全球性的IT宕机事件吗？很多人以为CrowdStrike完了。但事实正好相反——就像银行经历一次抢劫后安保反而更严密一样，CrowdStrike的客户发现切换安全厂商的成本太高了，反而续约率更高。聪明钱（Tiger Global +45%）已经悄悄进场了。这是经典的\"别人恐惧时贪婪\"的机会。",
+        historicalAnalogy: "类似 2017 年 Equifax 数据泄露后的反弹：危机变成护城河",
         C: { score: 80, epsGrowth: 28, detail: "当季EPS同比增长28%。2024年宕机事件影响正在消退，客户流失率低于预期。" },
         A: { score: 75, annualGrowth: [35, 45, 22, -5, 28], detail: "2024年因宕机事件出现增速放缓，但2025年已强劲反弹。" },
-        N: { score: 72, events: ["Charlotte AI安全助手发布", "宕机事件后安全机制全面升级", "扩展至身份安全领域"], detail: "Charlotte AI是网络安全领域首个AI原生助手。身份安全是新增长点。" },
+        N: { score: 72, events: ["Charlotte AI安全助手发布", "宕机事件后安全机制全面升级", "扩展至身份安全领域"], detail: "Charlotte AI是网络安全领域首个AI原生助手。身份安全是新增长点。", authenticity: 72, authDetail: "中高真实性：Charlotte AI已有客户部署案例，但AI安全助手的实际效果尚需更多季度数据。安全机制升级是被动改进而非主动创新。身份安全领域的市场份额仍需验证。宕机事件的负面影响正在消退是可验证事实。" },
         S: { score: 75, volumeRatio: 1.3, floatShort: 2.8, detail: "成交量恢复正常，空头占比2.8%反映部分投资者仍有顾虑。" },
         L: { score: 78, rsRating: 80, industryRank: 2, detail: "RS评级80，网络安全行业第2。股价已从宕机低点反弹65%。" },
         I: { score: 82, fundCount: 2600, fundChange: "+88", detail: "Tiger Global大幅增持45%，多家精品基金新建仓。" },
@@ -509,9 +523,11 @@ const CANSLIM_STOCKS = [
     },
     {
         ticker: "GOOGL", name: "Alphabet Inc.", price: 172.80,
+        narrative: "Google现在就像一个被低估的优等生——PE只有22倍，是科技巨头里最便宜的。市场在担心AI搜索会毁掉广告收入，但这可能是过度恐慌。而且别忘了Waymo——这是一个被藏在财报里的\"隐形金矿\"，自动驾驶出租车的商业化一旦规模化，价值可能超过YouTube。适合稳健型投资者作为\"底仓\"配置。",
+        historicalAnalogy: "类似 2016 年的亚马逊：市场质疑AWS能否盈利，结果AWS变成了利润引擎",
         C: { score: 78, epsGrowth: 22, detail: "当季EPS同比增长22%。搜索广告稳健，Cloud增速加快，YouTube维持增长。" },
         A: { score: 80, annualGrowth: [15, -5, 25, 30, 22], detail: "年度EPS稳定增长。$4.5→$5.1→$4.8→$6.0→$7.8→$9.5。" },
-        N: { score: 70, events: ["Gemini 2.0整合进全线产品", "AI Overview改变搜索体验", "Waymo自动驾驶扩展至新城市"], detail: "Gemini是核心新产品，但AI对搜索广告模式的影响仍不确定。Waymo是隐藏的'N'因子。" },
+        N: { score: 70, events: ["Gemini 2.0整合进全线产品", "AI Overview改变搜索体验", "Waymo自动驾驶扩展至新城市"], detail: "Gemini是核心新产品，但AI对搜索广告模式的影响仍不确定。Waymo是隐藏的'N'因子。", authenticity: 68, authDetail: "中等真实性：Gemini整合是真实的但竞争力对比GPT-4/Claude仍有争议。AI Overview的用户体验改善有数据支撑，但广告影响尚不明确。Waymo的运营数据（日订单量10万+）可验证，是被低估的真实资产。" },
         S: { score: 72, volumeRatio: 1.0, floatShort: 0.5, detail: "成交量平稳，空头极少。大盘股流通性好但缺乏供需紧张的催化。" },
         L: { score: 68, rsRating: 72, industryRank: 3, detail: "RS评级72，互联网行业第3（落后于META和AMZN）。表现中规中矩。" },
         I: { score: 85, fundCount: 5500, fundChange: "+110", detail: "5500只基金持有，机构覆盖极广。Citadel、Renaissance 等增持。" },
@@ -532,6 +548,187 @@ const CANSLIM_MARKET = {
     statusColor: "var(--accent-orange)",
     desc: "S&P 500 在50日均线上方但弱于200日均线。分发日(放量下跌)已累积4天。Put/Call=1.28显示极度恐惧。欧奈尔建议：当前环境下降低仓位至50-75%，只买最强的CAN SLIM候选。"
 };
+
+// === Weinstein Stage Analysis Data ===
+const WEINSTEIN_STOCKS = [
+    {
+        ticker: "NVDA", stage: 2, stageLabel: "上升期", stageColor: "var(--accent-green)",
+        weekMA30: "上方", volumeTrend: "放量上攻", weeklyBreakout: true,
+        detail: "股价稳定运行在30周均线上方，均线持续上行。成交量在突破关键阻力位时显著放大。经典的Stage 2上升趋势。",
+        action: "持有/加仓", actionColor: "var(--accent-green)",
+        vcpPattern: false
+    },
+    {
+        ticker: "META", stage: 2, stageLabel: "上升期", stageColor: "var(--accent-green)",
+        weekMA30: "上方", volumeTrend: "温和放量", weeklyBreakout: false,
+        detail: "股价持续位于30周均线上方，均线斜率为正。成交量模式健康——上涨放量、回调缩量。",
+        action: "持有", actionColor: "var(--accent-green)",
+        vcpPattern: false
+    },
+    {
+        ticker: "TSM", stage: 2, stageLabel: "上升期", stageColor: "var(--accent-green)",
+        weekMA30: "上方", volumeTrend: "放量突破", weeklyBreakout: true,
+        detail: "近期放量突破$180阻力位，30周均线加速上行。ADR成交量创6个月新高。Stage 2确认。",
+        action: "买入/加仓", actionColor: "var(--accent-green)",
+        vcpPattern: true
+    },
+    {
+        ticker: "AVGO", stage: 2, stageLabel: "上升期(后段)", stageColor: "var(--accent-green)",
+        weekMA30: "上方", volumeTrend: "正常", weeklyBreakout: false,
+        detail: "处于Stage 2后段，股价距30周均线较远（偏离度18%）。需警惕回调到均线附近的风险。",
+        action: "持有/收紧止损", actionColor: "var(--accent-orange)",
+        vcpPattern: false
+    },
+    {
+        ticker: "LLY", stage: 2, stageLabel: "上升期", stageColor: "var(--accent-green)",
+        weekMA30: "上方", volumeTrend: "缩量回调中", weeklyBreakout: false,
+        detail: "股价在30周均线上方回调，成交量明显萎缩——这是健康的\"休息\"信号。等待缩量完成后可能形成VCP形态。",
+        action: "观望/等VCP突破", actionColor: "var(--accent-orange)",
+        vcpPattern: true
+    },
+    {
+        ticker: "PLTR", stage: 2, stageLabel: "上升期(过热)", stageColor: "var(--accent-orange)",
+        weekMA30: "远上方", volumeTrend: "异常放量", weeklyBreakout: true,
+        detail: "股价远离30周均线（偏离度45%），伴随散户异常放量。过热的Stage 2，类似2021年MEME股特征。",
+        action: "谨慎/勿追高", actionColor: "var(--accent-red)",
+        vcpPattern: false
+    },
+    {
+        ticker: "CRWD", stage: 1, stageLabel: "筑底期→上升期", stageColor: "var(--accent-blue)",
+        weekMA30: "正在穿越", volumeTrend: "底部放量", weeklyBreakout: false,
+        detail: "股价正在从Stage 1(筑底)向Stage 2(上升)过渡——30周均线从下降转平。底部成交量放大是积极信号。",
+        action: "关注/等确认", actionColor: "var(--accent-blue)",
+        vcpPattern: false
+    },
+    {
+        ticker: "GOOGL", stage: 2, stageLabel: "上升期(弱)", stageColor: "var(--accent-orange)",
+        weekMA30: "上方(微弱)", volumeTrend: "平淡", weeklyBreakout: false,
+        detail: "勉强维持在30周均线上方，均线斜率趋平。属于\"弱势Stage 2\"——如果大盘走弱，可能滑入Stage 3。",
+        action: "持有/缩小仓位", actionColor: "var(--accent-orange)",
+        vcpPattern: false
+    },
+    {
+        ticker: "INTC", stage: 1, stageLabel: "筑底期", stageColor: "var(--text-muted)",
+        weekMA30: "下方(接近)", volumeTrend: "底部放量", weeklyBreakout: false,
+        detail: "经历了漫长的Stage 4下降后，正在Stage 1筑底。30周均线转平是积极信号。需等待放量突破均线确认转势。",
+        action: "观察/未到买点", actionColor: "var(--text-muted)",
+        vcpPattern: false
+    },
+    {
+        ticker: "ENPH", stage: 4, stageLabel: "下降期", stageColor: "var(--accent-red)",
+        weekMA30: "下方", volumeTrend: "放量下跌", weeklyBreakout: false,
+        detail: "股价持续运行在30周均线下方，均线持续下行。典型的Stage 4下降趋势。虽然政策利好，但技术面尚未确认转势。",
+        action: "回避/勿抄底", actionColor: "var(--accent-red)",
+        vcpPattern: false
+    },
+];
+
+// === Minervini VCP (Volatility Contraction Pattern) Data ===
+const MINERVINI_VCP = [
+    {
+        ticker: "TSM", name: "台积电", price: 185.30,
+        trendTemplate: true, // Minervini Trend Template check
+        above50ma: true, above150ma: true, above200ma: true,
+        ma50AboveMa200: true, ma200Rising: true,
+        high52w: 192.50, low52w: 105.20,
+        currentVsHigh: -3.7, // % from 52w high
+        currentVsLow: 76.1, // % from 52w low
+        rs: 91,
+        vcpContractions: [
+            { width: "15%", duration: "4周" },
+            { width: "8%", duration: "2周" },
+            { width: "3.5%", duration: "1周" },
+        ],
+        pivotPoint: 188.50,
+        pivotVolume: "需>50日均量1.5倍",
+        status: "approaching", // approaching, triggered, watching
+        statusLabel: "接近枢轴点",
+        detail: "经典的3次收缩VCP：波幅从15%→8%→3.5%逐步收窄，伴随成交量萎缩。当前距离枢轴点$188.50仅差1.7%。一旦放量突破，是高概率买入信号。",
+        score: 92
+    },
+    {
+        ticker: "LLY", name: "Eli Lilly", price: 820.50,
+        trendTemplate: true,
+        above50ma: true, above150ma: true, above200ma: true,
+        ma50AboveMa200: true, ma200Rising: true,
+        high52w: 875.00, low52w: 545.00,
+        currentVsHigh: -6.2,
+        currentVsLow: 50.5,
+        rs: 87,
+        vcpContractions: [
+            { width: "18%", duration: "6周" },
+            { width: "10%", duration: "3周" },
+            { width: "5%", duration: "2周" },
+        ],
+        pivotPoint: 845.00,
+        pivotVolume: "需>50日均量1.4倍",
+        status: "watching",
+        statusLabel: "VCP形成中",
+        detail: "GLP-1减肥药催化下形成教科书级VCP：从$875高点回调后，波幅连续收缩（18%→10%→5%）。第三次收缩正在进行中。等待放量突破$845枢轴。",
+        score: 88
+    },
+    {
+        ticker: "CRWD", name: "CrowdStrike", price: 345.20,
+        trendTemplate: false, // Not yet meeting all trend template criteria
+        above50ma: true, above150ma: true, above200ma: false,
+        ma50AboveMa200: false, ma200Rising: false,
+        high52w: 398.00, low52w: 215.00,
+        currentVsHigh: -13.3,
+        currentVsLow: 60.6,
+        rs: 80,
+        vcpContractions: [
+            { width: "22%", duration: "8周" },
+            { width: "12%", duration: "4周" },
+        ],
+        pivotPoint: 365.00,
+        pivotVolume: "需>50日均量2.0倍（因宕机事件需更强确认）",
+        status: "watching",
+        statusLabel: "趋势模板未完全满足",
+        detail: "股价已从宕机低点强劲反弹，但200日均线尚未转升。VCP仅完成2次收缩，波幅收窄趋势良好。需等待200MA转升且第3次收缩完成后才是高质量买点。",
+        score: 72
+    },
+    {
+        ticker: "AVGO", name: "Broadcom", price: 195.80,
+        trendTemplate: true,
+        above50ma: true, above150ma: true, above200ma: true,
+        ma50AboveMa200: true, ma200Rising: true,
+        high52w: 205.00, low52w: 122.50,
+        currentVsHigh: -4.5,
+        currentVsLow: 59.8,
+        rs: 85,
+        vcpContractions: [
+            { width: "12%", duration: "3周" },
+            { width: "6%", duration: "2周" },
+            { width: "2.8%", duration: "1周" },
+        ],
+        pivotPoint: 201.00,
+        pivotVolume: "需>50日均量1.3倍",
+        status: "approaching",
+        statusLabel: "接近枢轴点",
+        detail: "趋势模板完全满足。VCP形成3次收缩，波幅收窄至2.8%——这是极度紧缩的信号，预示即将做出方向选择。枢轴点$201仅差2.7%。高质量设置。",
+        score: 90
+    },
+    {
+        ticker: "META", name: "Meta", price: 585.20,
+        trendTemplate: true,
+        above50ma: true, above150ma: true, above200ma: true,
+        ma50AboveMa200: true, ma200Rising: true,
+        high52w: 602.00, low52w: 390.00,
+        currentVsHigh: -2.8,
+        currentVsLow: 50.1,
+        rs: 88,
+        vcpContractions: [
+            { width: "8%", duration: "2周" },
+            { width: "4%", duration: "1周" },
+        ],
+        pivotPoint: 598.00,
+        pivotVolume: "需>50日均量1.2倍",
+        status: "approaching",
+        statusLabel: "浅幅VCP",
+        detail: "因为趋势极强，VCP仅有2次收缩且幅度较浅（8%→4%）。这类'紧凑型VCP'在强势股中常见，通常预示持续上涨。距枢轴$598差2.1%。",
+        score: 85
+    },
+];
 
 const AI_PICKS = [
     { ticker: "TSM", name: "台积电", score: 93, reason: "AI 算力军备竞赛核心供应商，NVDA/AAPL/AMD 三大客户同步增长", tags: ["tag-chain", "供应链"] },

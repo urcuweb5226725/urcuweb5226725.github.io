@@ -729,12 +729,38 @@
 
         const totalColor = s.total >= 80 ? 'var(--accent-green)' : s.total >= 65 ? 'var(--accent-orange)' : 'var(--accent-red)';
 
+        // N-factor authenticity
+        const nAuth = s.N.authenticity || 0;
+        const nAuthColor = nAuth >= 80 ? 'var(--accent-green)' : nAuth >= 60 ? 'var(--accent-orange)' : 'var(--accent-red)';
+        const nAuthHtml = s.N.authenticity ? `
+            <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;margin-bottom:16px">
+                <h4 style="font-size:0.9rem;margin-bottom:8px;color:var(--accent-cyan)"><i class="fas fa-shield-alt"></i> N因子真实性验证 (AI独家)</h4>
+                <div class="n-auth-bar">
+                    <span class="n-auth-label">真实性</span>
+                    <div class="n-auth-track"><div class="n-auth-fill" style="width:${nAuth}%;background:${nAuthColor}"></div></div>
+                    <span style="font-weight:700;color:${nAuthColor}">${nAuth}%</span>
+                </div>
+                <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:8px;line-height:1.5">${s.N.authDetail || ''}</p>
+            </div>
+        ` : '';
+
+        // Narrative
+        const narrativeHtml = s.narrative ? `
+            <div class="cs-narrative">
+                <h4><i class="fas fa-comment-dots"></i> 白话版解读 — 一句话告诉你为什么值得关注</h4>
+                <p>${s.narrative}</p>
+                ${s.historicalAnalogy ? `<p class="analogy"><i class="fas fa-history"></i> 历史类比：${s.historicalAnalogy}</p>` : ''}
+            </div>
+        ` : '';
+
         document.getElementById('canslimDetail').innerHTML = `
             <div style="text-align:center;margin-bottom:20px">
                 <span style="font-size:3rem;font-weight:800;color:${totalColor}">${s.total}</span>
                 <span style="display:block;font-size:0.85rem;color:var(--text-muted)">CAN SLIM 综合评分</span>
             </div>
+            ${narrativeHtml}
             <div class="cs-detail-grid">${cardsHtml}</div>
+            ${nAuthHtml}
             <div class="cs-ai-insight">
                 <h4><i class="fas fa-robot"></i> AI 增强分析</h4>
                 <p>${s.aiInsight}</p>
@@ -749,5 +775,115 @@
     });
 
     renderCanslim();
+
+    // === Weinstein Stage Analysis ===
+    function renderWeinstein() {
+        const header = `
+            <div class="ws-item" style="font-weight:600;color:var(--text-muted);font-size:0.72rem">
+                <div>阶段</div><div>股票</div><div>30周MA</div><div>分析</div><div>量能</div><div>操作建议</div>
+            </div>
+        `;
+
+        // Sort: Stage 2 first, then 1, then others
+        const sortOrder = { 2: 0, 1: 1, 3: 2, 4: 3 };
+        const sorted = [...WEINSTEIN_STOCKS].sort((a, b) => (sortOrder[a.stage] || 9) - (sortOrder[b.stage] || 9));
+
+        const html = sorted.map(s => {
+            const stageBg = s.stage === 2 ? 'rgba(16,185,129,0.15)' : s.stage === 1 ? 'rgba(59,130,246,0.15)' : s.stage === 4 ? 'rgba(239,68,68,0.15)' : 'rgba(245,158,11,0.15)';
+            return `
+                <div class="ws-item">
+                    <div><span class="ws-stage-badge" style="background:${stageBg};color:${s.stageColor}">S${s.stage}</span></div>
+                    <div>
+                        <div style="font-weight:700">${s.ticker}</div>
+                        <div style="font-size:0.72rem;color:var(--text-muted)">${s.stageLabel}</div>
+                    </div>
+                    <div style="font-size:0.82rem">${s.weekMA30}</div>
+                    <div class="ws-detail-text">${s.detail}${s.vcpPattern ? '<span class="ws-vcp-tag">VCP形态</span>' : ''}</div>
+                    <div style="font-size:0.82rem">${s.volumeTrend}</div>
+                    <div><span class="ws-action-badge" style="color:${s.actionColor};background:${s.actionColor}22">${s.action}</span></div>
+                </div>
+            `;
+        }).join('');
+
+        document.getElementById('weinsteinResults').innerHTML = header + html;
+    }
+    renderWeinstein();
+
+    // === Minervini VCP ===
+    function renderMinervini() {
+        const sorted = [...MINERVINI_VCP].sort((a, b) => b.score - a.score);
+
+        const html = sorted.map(v => {
+            const maxWidth = Math.max(...v.vcpContractions.map(c => parseFloat(c.width)));
+            const contractionsHtml = v.vcpContractions.map((c, i) => {
+                const height = (parseFloat(c.width) / maxWidth) * 100;
+                return `<div class="vcp-bar-wrapper">
+                    <div class="vcp-contraction-bar" style="height:${height}%"></div>
+                    <span class="vcp-contraction-label">${c.width}<br>${c.duration}</span>
+                </div>`;
+            }).join('');
+
+            const statusClass = `vcp-status-${v.status}`;
+
+            const checks = [
+                { label: '>50MA', pass: v.above50ma },
+                { label: '>150MA', pass: v.above150ma },
+                { label: '>200MA', pass: v.above200ma },
+                { label: '50>200', pass: v.ma50AboveMa200 },
+                { label: '200MA升', pass: v.ma200Rising },
+                { label: `RS ${v.rs}`, pass: v.rs >= 70 },
+            ];
+
+            const checksHtml = checks.map(c =>
+                `<span class="vcp-check ${c.pass ? 'vcp-check-pass' : 'vcp-check-fail'}">${c.pass ? '&#10003;' : '&#10007;'} ${c.label}</span>`
+            ).join('');
+
+            return `
+                <div class="vcp-card">
+                    <div class="vcp-header">
+                        <div class="vcp-ticker-info">
+                            <span class="vcp-ticker">${v.ticker}</span>
+                            <span class="vcp-name">${v.name}</span>
+                            <span class="vcp-price">$${v.price}</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:12px">
+                            <span class="score-badge ${v.score >= 85 ? 'score-high' : v.score >= 70 ? 'score-medium' : 'score-low'}">${v.score}</span>
+                            <span class="vcp-status ${statusClass}">${v.statusLabel}</span>
+                        </div>
+                    </div>
+                    <div class="vcp-body">
+                        <div>
+                            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:6px">波动率收缩 (VCP)</div>
+                            <div class="vcp-contractions">${contractionsHtml}</div>
+                        </div>
+                        <div class="vcp-metrics">
+                            <div class="vcp-metric">
+                                <span class="vcp-metric-label">枢轴点</span>
+                                <span class="vcp-metric-value">$${v.pivotPoint}</span>
+                            </div>
+                            <div class="vcp-metric">
+                                <span class="vcp-metric-label">距52周高</span>
+                                <span class="vcp-metric-value" style="color:${v.currentVsHigh > -10 ? 'var(--accent-green)' : 'var(--accent-orange)'}">${v.currentVsHigh}%</span>
+                            </div>
+                            <div class="vcp-metric">
+                                <span class="vcp-metric-label">距52周低</span>
+                                <span class="vcp-metric-value positive">+${v.currentVsLow}%</span>
+                            </div>
+                            <div class="vcp-metric">
+                                <span class="vcp-metric-label">RS评分</span>
+                                <span class="vcp-metric-value">${v.rs}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vcp-template-check">${checksHtml}</div>
+                    <div class="vcp-detail-text">${v.detail}</div>
+                    <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px">买入确认量能：${v.pivotVolume}</div>
+                </div>
+            `;
+        }).join('');
+
+        document.getElementById('minerviniResults').innerHTML = html;
+    }
+    renderMinervini();
 
 })();

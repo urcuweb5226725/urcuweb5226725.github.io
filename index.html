@@ -41,6 +41,12 @@
             <li class="nav-item" data-module="canslim">
                 <i class="fas fa-trophy"></i><span>CAN SLIM</span>
             </li>
+            <li class="nav-item" data-module="weinstein">
+                <i class="fas fa-layer-group"></i><span>阶段分析</span>
+            </li>
+            <li class="nav-item" data-module="minervini">
+                <i class="fas fa-crosshairs"></i><span>VCP 猎手</span>
+            </li>
         </ul>
         <div class="sidebar-footer">
             <div class="market-status">
@@ -462,6 +468,60 @@
                 </div>
             </div>
         </section>
+        <!-- Weinstein Stage Analysis -->
+        <section class="module" id="mod-weinstein">
+            <div class="module-header">
+                <h1>Weinstein 阶段分析</h1>
+                <p class="subtitle">Stan Weinstein 四阶段理论 — 只在 Stage 2（上升期）买入</p>
+            </div>
+            <div class="weinstein-legend">
+                <div class="ws-stage-card ws-s1"><span class="ws-num">1</span><div><strong>筑底期</strong><div class="ws-stage-desc">30周均线走平·成交量低迷·等待信号</div></div></div>
+                <div class="ws-stage-card ws-s2"><span class="ws-num">2</span><div><strong>上升期</strong><div class="ws-stage-desc">放量突破30MA·均线上行·买入时机</div></div></div>
+                <div class="ws-stage-card ws-s3"><span class="ws-num">3</span><div><strong>筑顶期</strong><div class="ws-stage-desc">30周均线走平·高位震荡·准备卖出</div></div></div>
+                <div class="ws-stage-card ws-s4"><span class="ws-num">4</span><div><strong>下降期</strong><div class="ws-stage-desc">跌破30MA·均线下行·回避</div></div></div>
+            </div>
+            <div class="card full-width">
+                <div class="card-header">
+                    <h3><i class="fas fa-layer-group"></i> 阶段扫描结果</h3>
+                    <span class="badge badge-success">自动识别</span>
+                </div>
+                <div class="card-body" id="weinsteinResults"></div>
+            </div>
+        </section>
+
+        <!-- Minervini VCP -->
+        <section class="module" id="mod-minervini">
+            <div class="module-header">
+                <h1>Minervini VCP 猎手</h1>
+                <p class="subtitle">Mark Minervini 超级表现法 — 波动率收缩形态 (VCP) + 趋势模板</p>
+            </div>
+            <div class="minervini-template-check">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-check-double"></i> Minervini 趋势模板 (Trend Template)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-criteria">
+                            <div class="mt-item"><i class="fas fa-check"></i> 股价 > 50日均线 & 150日均线</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> 股价 > 200日均线</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> 50日均线 > 200日均线</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> 200日均线至少上升1个月</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> 距52周高点 < 25%</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> 距52周低点 > 30%</div>
+                            <div class="mt-item"><i class="fas fa-check"></i> RS评分 > 70</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card full-width" style="margin-top:16px">
+                <div class="card-header">
+                    <h3><i class="fas fa-crosshairs"></i> VCP 形态扫描</h3>
+                    <span class="badge badge-warning">实时</span>
+                </div>
+                <div class="card-body" id="minerviniResults"></div>
+            </div>
+        </section>
+
         <!-- CAN SLIM Module -->
         <section class="module" id="mod-canslim">
             <div class="module-header">
