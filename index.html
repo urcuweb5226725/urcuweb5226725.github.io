@@ -23,18 +23,6 @@
             <li class="nav-item" data-module="screener">
                 <i class="fas fa-filter"></i><span>多因子选股</span>
             </li>
-            <li class="nav-item" data-module="supplychain">
-                <i class="fas fa-project-diagram"></i><span>供应链雷达</span>
-            </li>
-            <li class="nav-item" data-module="policy">
-                <i class="fas fa-landmark"></i><span>政策因子</span>
-            </li>
-            <li class="nav-item" data-module="sentiment">
-                <i class="fas fa-comments"></i><span>情绪与轧空</span>
-            </li>
-            <li class="nav-item" data-module="hedgefund">
-                <i class="fas fa-user-tie"></i><span>13F 跟单</span>
-            </li>
             <li class="nav-item" data-module="narrative">
                 <i class="fas fa-microphone-alt"></i><span>叙事验证</span>
             </li>
@@ -48,7 +36,7 @@
                 <i class="fas fa-crosshairs"></i><span>VCP 猎手</span>
             </li>
             <li class="nav-item" data-module="duanyongping">
-                <i class="fas fa-yin-yang"></i><span>段永平选股</span>
+                <i class="fas fa-yin-yang"></i><span>段永平×费雪</span>
             </li>
         </ul>
         <div class="sidebar-footer">
@@ -82,16 +70,16 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon neutral"><i class="fas fa-bolt"></i></div>
+                    <div class="stat-icon neutral"><i class="fas fa-crosshairs"></i></div>
                     <div class="stat-info">
-                        <span class="stat-label">轧空预警</span>
+                        <span class="stat-label">VCP 信号</span>
                         <span class="stat-value" id="squeezeCount">--</span>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon policy"><i class="fas fa-landmark"></i></div>
+                    <div class="stat-icon policy"><i class="fas fa-yin-yang"></i></div>
                     <div class="stat-info">
-                        <span class="stat-label">政策受益股</span>
+                        <span class="stat-label">段永平精选</span>
                         <span class="stat-value" id="policyCount">--</span>
                     </div>
                 </div>
@@ -264,167 +252,6 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Supply Chain Radar -->
-        <section class="module" id="mod-supplychain">
-            <div class="module-header">
-                <h1>供应链联动雷达</h1>
-                <p class="subtitle">追踪巨头财报 &rarr; 毫秒级锁定受益供应商</p>
-            </div>
-            <div class="chain-controls">
-                <div class="chain-search">
-                    <label>选择核心公司</label>
-                    <select id="chainCompany">
-                        <option value="NVDA">NVIDIA (NVDA)</option>
-                        <option value="AAPL">Apple (AAPL)</option>
-                        <option value="TSLA">Tesla (TSLA)</option>
-                        <option value="MSFT">Microsoft (MSFT)</option>
-                        <option value="AMZN">Amazon (AMZN)</option>
-                        <option value="META">Meta (META)</option>
-                        <option value="GOOGL">Alphabet (GOOGL)</option>
-                    </select>
-                    <button class="btn-primary" id="runChainAnalysis">
-                        <i class="fas fa-search"></i> 分析供应链
-                    </button>
-                </div>
-            </div>
-            <div class="chain-layout">
-                <div class="chain-graph-container">
-                    <div class="card">
-                        <div class="card-header"><h3><i class="fas fa-project-diagram"></i> 供应链图谱</h3></div>
-                        <div class="card-body">
-                            <div class="chain-graph" id="chainGraph"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="chain-details">
-                    <div class="card">
-                        <div class="card-header"><h3><i class="fas fa-chart-line"></i> 联动分析</h3></div>
-                        <div class="card-body" id="chainDetails"></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header"><h3><i class="fas fa-lightbulb"></i> AI 交易建议</h3></div>
-                        <div class="card-body" id="chainRecommendations"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Policy Exposure -->
-        <section class="module" id="mod-policy">
-            <div class="module-header">
-                <h1>政策因子选股器</h1>
-                <p class="subtitle">政策红利追踪 | 国会议员持仓监控 | 法案受益度评分</p>
-            </div>
-            <div class="policy-tabs">
-                <button class="tab-btn active" data-tab="bills">法案受益度</button>
-                <button class="tab-btn" data-tab="congress">议员持仓</button>
-            </div>
-            <div class="tab-content active" id="tab-bills">
-                <div class="bills-list">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-scroll"></i> 2026 热门法案追踪</h3>
-                        </div>
-                        <div class="card-body" id="billsList"></div>
-                    </div>
-                </div>
-                <div class="policy-results">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-star"></i> 受益股排行</h3>
-                        </div>
-                        <div class="card-body" id="policyStocks"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-content" id="tab-congress">
-                <div class="card full-width">
-                    <div class="card-header">
-                        <h3><i class="fas fa-user-shield"></i> 国会议员近期交易</h3>
-                    </div>
-                    <div class="card-body" id="congressTrades"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sentiment & Short Squeeze -->
-        <section class="module" id="mod-sentiment">
-            <div class="module-header">
-                <h1>情绪与轧空扫描器</h1>
-                <p class="subtitle">社交媒体深度共鸣分析 | 空头拥挤度预警 | 反向指标</p>
-            </div>
-            <div class="sentiment-layout">
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-fire-alt"></i> 轧空预警排行</h3>
-                        <span class="badge badge-warning">实时</span>
-                    </div>
-                    <div class="card-body" id="squeezeList"></div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-brain"></i> 情绪-基本面背离</h3>
-                    </div>
-                    <div class="card-body" id="divergenceList"></div>
-                </div>
-                <div class="card full-width">
-                    <div class="card-header">
-                        <h3><i class="fas fa-comments"></i> 社交媒体热度分析</h3>
-                        <div class="source-filters">
-                            <button class="source-btn active" data-source="all">全部</button>
-                            <button class="source-btn" data-source="reddit">Reddit</button>
-                            <button class="source-btn" data-source="twitter">X/Twitter</button>
-                            <button class="source-btn" data-source="stocktwits">StockTwits</button>
-                        </div>
-                    </div>
-                    <div class="card-body" id="socialHeat"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 13F Hedge Fund Tracking -->
-        <section class="module" id="mod-hedgefund">
-            <div class="module-header">
-                <h1>13F 对冲基金跟单</h1>
-                <p class="subtitle">追踪顶级基金新进股 | 持仓推演 | 影子操盘手监控</p>
-            </div>
-            <div class="hf-controls">
-                <select id="hfSelect">
-                    <option value="all">全部顶级基金</option>
-                    <option value="berkshire">Berkshire Hathaway</option>
-                    <option value="bridgewater">Bridgewater Associates</option>
-                    <option value="renaissance">Renaissance Technologies</option>
-                    <option value="citadel">Citadel Advisors</option>
-                    <option value="pershing">Pershing Square</option>
-                    <option value="appaloosa">Appaloosa Management</option>
-                    <option value="tiger">Tiger Global</option>
-                </select>
-                <button class="btn-primary" id="runHfAnalysis">
-                    <i class="fas fa-search"></i> 分析持仓
-                </button>
-            </div>
-            <div class="hf-layout">
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-plus-circle"></i> 最新增持 / 新进股</h3>
-                    </div>
-                    <div class="card-body" id="hfNewPositions"></div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-users"></i> 多基金共识持仓</h3>
-                    </div>
-                    <div class="card-body" id="hfConsensus"></div>
-                </div>
-                <div class="card full-width">
-                    <div class="card-header">
-                        <h3><i class="fas fa-ghost"></i> 影子操盘手 — 精品基金异动</h3>
-                    </div>
-                    <div class="card-body" id="hfShadow"></div>
                 </div>
             </div>
         </section>
@@ -616,8 +443,8 @@
         <!-- Duan Yongping Value Framework -->
         <section class="module" id="mod-duanyongping">
             <div class="module-header">
-                <h1>段永平价值选股法</h1>
-                <p class="subtitle">"买股票就是买公司" — 商业模式 &times; 企业文化 &times; 安全边际 &times; 长期持有</p>
+                <h1>段永平 &times; 费雪 价值成长选股</h1>
+                <p class="subtitle">"买股票就是买公司" — 商业模式 &times; 企业文化 &times; 安全边际 &times; 长期持有 &times; AI 闲聊法</p>
             </div>
             <div class="dyp-philosophy">
                 <div class="dyp-pillar">
@@ -639,6 +466,11 @@
                     <div class="dyp-pillar-icon"><i class="fas fa-hourglass-half"></i></div>
                     <div class="dyp-pillar-name">长期持有</div>
                     <div class="dyp-pillar-desc">"做时间的朋友"，不做短线投机</div>
+                </div>
+                <div class="dyp-pillar" style="border-color:var(--accent-purple)">
+                    <div class="dyp-pillar-icon" style="color:var(--accent-purple)"><i class="fas fa-comments"></i></div>
+                    <div class="dyp-pillar-name">费雪闲聊法</div>
+                    <div class="dyp-pillar-desc">AI 模拟 Scuttlebutt：员工口碑、客户评价、供应商关系、研发实力</div>
                 </div>
             </div>
             <div class="dyp-results">

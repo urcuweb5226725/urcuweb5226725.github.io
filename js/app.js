@@ -44,7 +44,7 @@
     function renderDashboard() {
         document.getElementById('bullishCount').textContent = '12';
         document.getElementById('bearishCount').textContent = '5';
-        document.getElementById('squeezeCount').textContent = '3';
+        document.getElementById('squeezeCount').textContent = '5';
         document.getElementById('policyCount').textContent = '8';
 
         // AI Picks
@@ -250,306 +250,6 @@
 
     // Init screener with default
     runScreener();
-
-    // === Supply Chain ===
-    function renderSupplyChain(ticker) {
-        const data = SUPPLY_CHAIN[ticker];
-        if (!data) return;
-
-        // Render graph
-        const graph = document.getElementById('chainGraph');
-        const all = [...data.upstream, ...data.downstream];
-        const upCount = data.upstream.length;
-        const downCount = data.downstream.length;
-
-        let nodesHtml = `<div class="chain-node core" style="left:50%;top:45%;transform:translate(-50%,-50%)">
-            <div class="node-ticker">${ticker}</div>
-            <div class="node-name">${data.name}</div>
-            <div class="node-impact" style="color:var(--accent-blue)">核心公司</div>
-        </div>`;
-
-        data.upstream.forEach((s, i) => {
-            const top = 10 + (i * (80 / Math.max(upCount - 1, 1)));
-            nodesHtml += `<div class="chain-node upstream" style="left:8%;top:${top}%">
-                <div class="node-ticker">${s.ticker}</div>
-                <div class="node-name">${s.name}</div>
-                <div class="node-impact positive">+${s.impact}%相关</div>
-            </div>`;
-        });
-
-        data.downstream.forEach((s, i) => {
-            const top = 15 + (i * (70 / Math.max(downCount - 1, 1)));
-            nodesHtml += `<div class="chain-node downstream" style="right:8%;top:${top}%">
-                <div class="node-ticker">${s.ticker}</div>
-                <div class="node-name">${s.name}</div>
-                <div class="node-impact" style="color:var(--accent-orange)">${s.correlation > 0 ? '+' : ''}${(s.correlation * 100).toFixed(0)}%联动</div>
-            </div>`;
-        });
-
-        graph.innerHTML = nodesHtml;
-
-        // Details
-        const detailsHtml = all.map(s => {
-            const type = data.upstream.includes(s) ? 'upstream' : 'downstream';
-            return `
-                <div class="chain-item">
-                    <div class="chain-item-info">
-                        <span class="chain-item-type ${type === 'upstream' ? 'type-upstream' : 'type-downstream'}">${type === 'upstream' ? '上游' : '下游'}</span>
-                        <div>
-                            <span class="chain-item-ticker">${s.ticker}</span>
-                            <span class="chain-item-name"> ${s.name} — ${s.role}</span>
-                        </div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px">
-                        <div class="correlation-bar"><div class="correlation-fill" style="width:${Math.abs(s.correlation) * 100}%"></div></div>
-                        <span style="font-size:0.8rem;font-weight:600">${(s.correlation * 100).toFixed(0)}%</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        document.getElementById('chainDetails').innerHTML = detailsHtml;
-
-        // Recommendations
-        const topUpstream = data.upstream.sort((a, b) => b.impact - a.impact).slice(0, 3);
-        const recsHtml = topUpstream.map(s => `
-            <div class="recommendation">
-                <div class="rec-header">
-                    <span class="rec-action rec-buy">关注买入</span>
-                    <span class="rec-ticker">${s.ticker} (${s.name})</span>
-                </div>
-                <div class="rec-reason">作为 ${data.name} 的核心${s.role}供应商，联动相关度 ${s.impact}%。当 ${ticker} 财报超预期时，${s.ticker} 通常在 1-3 个交易日内跟涨。历史联动系数: ${s.correlation.toFixed(2)}</div>
-            </div>
-        `).join('');
-        document.getElementById('chainRecommendations').innerHTML = recsHtml;
-    }
-
-    document.getElementById('runChainAnalysis').addEventListener('click', () => {
-        renderSupplyChain(document.getElementById('chainCompany').value);
-    });
-    renderSupplyChain('NVDA');
-
-    // === Policy ===
-    function renderPolicy() {
-        // Bills
-        const billsHtml = POLICY_BILLS.map(b => `
-            <div class="bill-card" data-bill="${b.id}">
-                <div class="bill-name">${b.name}</div>
-                <div class="bill-desc">${b.desc}</div>
-                <div class="bill-meta">
-                    <span class="bill-status ${b.status === 'active' ? 'status-active' : 'status-pending'}">${b.status === 'active' ? '已通过委员会' : '审议中'}</span>
-                    <span style="color:var(--text-muted)">${b.date}</span>
-                    <span style="color:var(--text-muted)">${b.stocks.length} 只受益股</span>
-                </div>
-            </div>
-        `).join('');
-        document.getElementById('billsList').innerHTML = billsHtml;
-
-        // Show first bill's stocks by default
-        renderPolicyStocks(POLICY_BILLS[0]);
-
-        document.querySelectorAll('.bill-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const bill = POLICY_BILLS.find(b => b.id === card.dataset.bill);
-                if (bill) renderPolicyStocks(bill);
-                document.querySelectorAll('.bill-card').forEach(c => c.style.background = '');
-                card.style.background = 'var(--bg-card-hover)';
-            });
-        });
-
-        // Congress trades
-        const tradesHtml = `
-            <div style="margin-bottom:12px">
-                <div class="congress-trade" style="font-weight:600;color:var(--text-muted);font-size:0.75rem">
-                    <div>议员</div><div>股票</div><div>操作</div><div>金额</div><div>时机</div>
-                </div>
-            </div>
-        ` + CONGRESS_TRADES.map(t => `
-            <div class="congress-trade">
-                <div>
-                    <span class="congress-name">${t.name}</span><br>
-                    <span class="congress-party party-${t.party.toLowerCase()}">${t.party === 'D' ? '民主党' : '共和党'}</span>
-                </div>
-                <div style="font-weight:600">${t.ticker}</div>
-                <div><span class="trade-type ${t.action === '买入' ? 'trade-buy' : 'trade-sell'}">${t.action}</span></div>
-                <div>${t.amount}</div>
-                <div style="font-size:0.75rem;color:var(--accent-orange)">${t.timing}</div>
-            </div>
-        `).join('');
-        document.getElementById('congressTrades').innerHTML = tradesHtml;
-    }
-
-    function renderPolicyStocks(bill) {
-        const html = bill.stocks.map(s => {
-            const color = s.score >= 85 ? 'var(--accent-green)' : s.score >= 70 ? 'var(--accent-blue)' : 'var(--accent-orange)';
-            return `
-                <div class="policy-stock-item">
-                    <div>
-                        <div style="font-weight:600">${s.ticker} <span style="color:var(--text-muted);font-weight:400;font-size:0.85rem">${s.name}</span></div>
-                        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">${s.reason}</div>
-                    </div>
-                    <div class="policy-score">
-                        <div class="score-bar"><div class="score-fill" style="width:${s.score}%;background:${color}"></div></div>
-                        <span style="font-weight:700;min-width:30px">${s.score}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        document.getElementById('policyStocks').innerHTML = html;
-    }
-
-    // Policy tabs
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-        });
-    });
-
-    renderPolicy();
-
-    // === Sentiment & Short Squeeze ===
-    function renderSentiment() {
-        // Squeeze list
-        const squeezeHtml = SQUEEZE_DATA.map(s => `
-            <div class="squeeze-item">
-                <div class="squeeze-info">
-                    <span class="squeeze-ticker">${s.ticker}</span>
-                    <span class="squeeze-name">${s.name}</span>
-                </div>
-                <div class="squeeze-metrics">
-                    <div class="squeeze-metric">
-                        <span class="squeeze-metric-label">空头占比</span>
-                        <span class="squeeze-metric-value negative">${s.shortInterest}%</span>
-                    </div>
-                    <div class="squeeze-metric">
-                        <span class="squeeze-metric-label">回补天数</span>
-                        <span class="squeeze-metric-value">${s.daysTocover}</span>
-                    </div>
-                    <div class="squeeze-metric">
-                        <span class="squeeze-metric-label">社交热度</span>
-                        <span class="squeeze-metric-value">${s.socialScore}</span>
-                    </div>
-                    <span class="alert-badge alert-${s.alert}">${s.alert === 'high' ? '高危' : s.alert === 'medium' ? '关注' : '一般'}</span>
-                </div>
-            </div>
-        `).join('');
-        document.getElementById('squeezeList').innerHTML = squeezeHtml;
-
-        // Divergence
-        const divHtml = DIVERGENCE_DATA.map(d => `
-            <div class="divergence-item">
-                <div class="div-header">
-                    <span class="div-ticker">${d.ticker} <span style="color:var(--text-muted);font-weight:400;font-size:0.85rem">${d.name}</span></span>
-                    <span class="alert-badge ${d.type === 'bullish' ? 'alert-low' : 'alert-high'}">${d.type === 'bullish' ? '看多机会' : '风险警示'}</span>
-                </div>
-                <div style="margin-bottom:8px">
-                    <div class="div-bars" style="margin-bottom:4px">
-                        <span class="div-bar-label">情绪</span>
-                        <div class="div-bar-track"><div class="div-bar-fill-${d.sentimentScore > 50 ? 'positive' : 'negative'}" style="width:${d.sentimentScore}%"></div></div>
-                        <span style="font-size:0.8rem;font-weight:600;min-width:30px">${d.sentimentScore}</span>
-                    </div>
-                    <div class="div-bars">
-                        <span class="div-bar-label">基本面</span>
-                        <div class="div-bar-track"><div class="div-bar-fill-positive" style="width:${d.fundamentalScore}%"></div></div>
-                        <span style="font-size:0.8rem;font-weight:600;min-width:30px">${d.fundamentalScore}</span>
-                    </div>
-                </div>
-                <div style="font-size:0.78rem;color:var(--text-muted)">${d.direction}</div>
-            </div>
-        `).join('');
-        document.getElementById('divergenceList').innerHTML = divHtml;
-
-        // Social Heat
-        renderSocialHeat('all');
-
-        document.querySelectorAll('.source-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderSocialHeat(btn.dataset.source);
-            });
-        });
-    }
-
-    function renderSocialHeat(source) {
-        const filtered = source === 'all' ? SOCIAL_HEAT : SOCIAL_HEAT.filter(s => s.source.toLowerCase().includes(source));
-        const html = `
-            <div class="social-item" style="font-weight:600;color:var(--text-muted);font-size:0.75rem">
-                <div>股票</div><div>热度条</div><div>提及次数</div><div>情绪</div><div>质量分</div>
-            </div>
-        ` + filtered.map(s => {
-            const sentColor = s.sentiment >= 70 ? 'positive' : s.sentiment <= 40 ? 'negative' : '';
-            return `
-                <div class="social-item">
-                    <div style="font-weight:700">${s.ticker}</div>
-                    <div><div class="heat-bar"><div class="heat-fill heat-${s.heat}" style="width:${Math.min(s.mentions / 160, 100)}%"></div></div></div>
-                    <div>${s.mentions.toLocaleString()} <span style="font-size:0.7rem" class="${s.change >= 0 ? 'positive' : 'negative'}">${s.change > 0 ? '+' : ''}${s.change}%</span></div>
-                    <div class="${sentColor}">${s.sentiment}</div>
-                    <div>${s.quality}</div>
-                </div>
-            `;
-        }).join('');
-        document.getElementById('socialHeat').innerHTML = html;
-    }
-
-    renderSentiment();
-
-    // === Hedge Fund 13F ===
-    function renderHedgeFund() {
-        // New positions
-        const posHtml = HF_POSITIONS.newPositions.map(p => `
-            <div class="hf-position">
-                <div class="hf-pos-info">
-                    <span class="hf-pos-ticker">${p.ticker} <span style="color:var(--text-muted);font-weight:400;font-size:0.8rem">${p.name}</span></span>
-                    <span class="hf-pos-fund">${p.fund} · ${p.date}</span>
-                </div>
-                <div style="text-align:right">
-                    <span class="hf-pos-change positive">${p.change}</span>
-                    <div style="font-size:0.75rem;color:var(--text-muted)">${p.value}</div>
-                </div>
-            </div>
-        `).join('');
-        document.getElementById('hfNewPositions').innerHTML = posHtml;
-
-        // Consensus
-        const consHtml = HF_POSITIONS.consensus.map(c => `
-            <div class="hf-consensus-item">
-                <div>
-                    <div style="font-weight:600">${c.ticker} <span style="color:var(--text-muted);font-weight:400;font-size:0.85rem">${c.name}</span></div>
-                    <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">${c.topFunds.join(' · ')}</div>
-                </div>
-                <div style="text-align:right">
-                    <span class="fund-count">${c.funds} 家基金</span>
-                    <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">${c.totalValue}</div>
-                </div>
-            </div>
-        `).join('');
-        document.getElementById('hfConsensus').innerHTML = consHtml;
-
-        // Shadow
-        const shadowHtml = `
-            <div class="shadow-item" style="font-weight:600;color:var(--text-muted);font-size:0.75rem">
-                <div>精品基金</div><div>标的</div><div>操作</div><div>规模</div><div>年化回报</div>
-            </div>
-        ` + HF_POSITIONS.shadow.map(s => `
-            <div class="shadow-item">
-                <div>
-                    <div class="shadow-fund">${s.fund}</div>
-                    <div class="shadow-fund-detail">${s.detail}</div>
-                </div>
-                <div style="font-weight:600">${s.ticker}</div>
-                <div><span class="trade-type trade-buy">${s.action}</span></div>
-                <div>${s.value}</div>
-                <div class="positive">${s.return1y}</div>
-            </div>
-        `).join('');
-        document.getElementById('hfShadow').innerHTML = shadowHtml;
-    }
-
-    document.getElementById('runHfAnalysis').addEventListener('click', renderHedgeFund);
-    renderHedgeFund();
 
     // === Narrative Auditor ===
     function renderNarrative(ticker) {
@@ -900,11 +600,12 @@
                             <span class="dyp-verdict">${s.verdict}</span>
                         </div>
                     </div>
-                    <div class="dyp-scores-bar">
+                    <div class="dyp-scores-bar" style="grid-template-columns:repeat(5,1fr)">
                         <div class="dyp-score-item"><span class="dyp-score-label">看懂生意</span><span class="dyp-score-val" style="color:${scoreColor(s.business.score)}">${s.business.score}</span></div>
                         <div class="dyp-score-item"><span class="dyp-score-label">企业文化</span><span class="dyp-score-val" style="color:${scoreColor(s.culture.score)}">${s.culture.score}</span></div>
                         <div class="dyp-score-item"><span class="dyp-score-label">安全边际</span><span class="dyp-score-val" style="color:${scoreColor(s.margin.score)}">${s.margin.score}</span></div>
                         <div class="dyp-score-item"><span class="dyp-score-label">长期持有</span><span class="dyp-score-val" style="color:${scoreColor(s.holding.score)}">${s.holding.score}</span></div>
+                        <div class="dyp-score-item"><span class="dyp-score-label" style="color:var(--accent-purple)">闲聊法</span><span class="dyp-score-val" style="color:${scoreColor(s.scuttlebutt.score)}">${s.scuttlebutt.score}</span></div>
                     </div>
                     <div class="dyp-narrative-preview">${s.narrative}</div>
                 </div>
@@ -959,8 +660,18 @@
                 </div>
                 <div class="dyp-detail-text">${s.holding.detail}</div>
             </div>
+            <div class="dyp-detail-block">
+                <h4 style="color:var(--accent-purple)"><i class="fas fa-comments"></i> 费雪闲聊法 (Scuttlebutt) — ${s.scuttlebutt.score}分</h4>
+                <div class="dyp-detail-meta">
+                    <div class="dyp-meta-item"><span class="label">员工口碑</span><span class="value">${s.scuttlebutt.source}</span></div>
+                    <div class="dyp-meta-item"><span class="label">客户NPS</span><span class="value">${s.scuttlebutt.customerNPS}</span></div>
+                    <div class="dyp-meta-item"><span class="label">供应商关系</span><span class="value" style="font-size:0.8rem">${s.scuttlebutt.supplierRelation}</span></div>
+                    <div class="dyp-meta-item"><span class="label">研发实力</span><span class="value">${s.scuttlebutt.rdStrength}</span></div>
+                </div>
+                <div class="dyp-detail-text">${s.scuttlebutt.detail}</div>
+            </div>
             <div class="cs-ai-insight">
-                <h4><i class="fas fa-robot"></i> AI 综合建议</h4>
+                <h4><i class="fas fa-robot"></i> AI 综合建议（段永平×费雪）</h4>
                 <p>${s.aiInsight}</p>
             </div>
         `;
