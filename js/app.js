@@ -886,4 +886,93 @@
     }
     renderMinervini();
 
+    // === Duan Yongping Framework ===
+    function renderDuanYongping() {
+        const sorted = [...DYP_STOCKS].sort((a, b) => b.totalScore - a.totalScore);
+        const html = sorted.map((s, i) => {
+            const scoreColor = v => v >= 85 ? 'var(--accent-green)' : v >= 70 ? 'var(--accent-orange)' : 'var(--accent-red)';
+            return `
+                <div class="dyp-stock-card" onclick="showDypDetail('${s.ticker}')">
+                    <div class="dyp-stock-header">
+                        <div class="dyp-stock-name">#${i+1} ${s.ticker} — ${s.name} <small>$${s.price}</small></div>
+                        <div style="display:flex;align-items:center;gap:12px">
+                            <span class="score-badge ${s.totalScore >= 85 ? 'score-high' : s.totalScore >= 70 ? 'score-medium' : 'score-low'}">${s.totalScore}</span>
+                            <span class="dyp-verdict">${s.verdict}</span>
+                        </div>
+                    </div>
+                    <div class="dyp-scores-bar">
+                        <div class="dyp-score-item"><span class="dyp-score-label">看懂生意</span><span class="dyp-score-val" style="color:${scoreColor(s.business.score)}">${s.business.score}</span></div>
+                        <div class="dyp-score-item"><span class="dyp-score-label">企业文化</span><span class="dyp-score-val" style="color:${scoreColor(s.culture.score)}">${s.culture.score}</span></div>
+                        <div class="dyp-score-item"><span class="dyp-score-label">安全边际</span><span class="dyp-score-val" style="color:${scoreColor(s.margin.score)}">${s.margin.score}</span></div>
+                        <div class="dyp-score-item"><span class="dyp-score-label">长期持有</span><span class="dyp-score-val" style="color:${scoreColor(s.holding.score)}">${s.holding.score}</span></div>
+                    </div>
+                    <div class="dyp-narrative-preview">${s.narrative}</div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('dypRanking').innerHTML = html;
+    }
+
+    window.showDypDetail = function(ticker) {
+        const s = DYP_STOCKS.find(x => x.ticker === ticker);
+        if (!s) return;
+        document.getElementById('dypDetailTitle').textContent = `${s.ticker} — ${s.name} 段永平框架详细分析`;
+        const marginColor = s.margin.marginOfSafety >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+        const marginPct = Math.min(Math.max((s.margin.score / 100) * 100, 5), 100);
+
+        document.getElementById('dypDetail').innerHTML = `
+            <div class="dyp-detail-block">
+                <h4><i class="fas fa-eye"></i> 看懂生意 — ${s.business.score}分</h4>
+                <div class="dyp-detail-meta">
+                    <div class="dyp-meta-item"><span class="label">商业模式</span><span class="value">${s.business.model}</span></div>
+                    <div class="dyp-meta-item"><span class="label">一句话说清</span><span class="value" style="font-size:0.8rem">${s.business.oneLiner}</span></div>
+                    <div class="dyp-meta-item"><span class="label">段永平能看懂</span><span class="value">${s.business.understandable ? '✓ 是' : '✗ 偏难'}</span></div>
+                </div>
+                <div class="dyp-detail-text"><strong>护城河：</strong>${s.business.moat}<br><br>${s.business.detail}</div>
+            </div>
+            <div class="dyp-detail-block">
+                <h4><i class="fas fa-heart"></i> 企业文化 — ${s.culture.score}分</h4>
+                <div class="dyp-detail-meta">
+                    <div class="dyp-meta-item"><span class="label">CEO诚信度</span><span class="value">${s.culture.ceoIntegrity}</span></div>
+                    <div class="dyp-meta-item"><span class="label">股东友好度</span><span class="value">${s.culture.shareholderFriendly}</span></div>
+                    <div class="dyp-meta-item"><span class="label">长期思维</span><span class="value">${s.culture.longTermThinking}</span></div>
+                </div>
+                <div class="dyp-detail-text">${s.culture.detail}</div>
+            </div>
+            <div class="dyp-detail-block">
+                <h4><i class="fas fa-shield-alt"></i> 安全边际 — ${s.margin.score}分</h4>
+                <div class="dyp-detail-meta">
+                    <div class="dyp-meta-item"><span class="label">当前PE</span><span class="value">${s.margin.currentPE}x</span></div>
+                    <div class="dyp-meta-item"><span class="label">历史PE区间</span><span class="value">${s.margin.historicalPE}</span></div>
+                    <div class="dyp-meta-item"><span class="label">合理估值</span><span class="value">$${s.margin.fairValue}</span></div>
+                    <div class="dyp-meta-item"><span class="label">安全边际</span><span class="value" style="color:${marginColor}">${s.margin.marginOfSafety > 0 ? '+' : ''}${s.margin.marginOfSafety}%</span></div>
+                </div>
+                <div class="dyp-margin-bar"><div class="dyp-margin-fill" style="width:${marginPct}%;background:${marginColor}"></div></div>
+                <div class="dyp-detail-text">${s.margin.detail}</div>
+            </div>
+            <div class="dyp-detail-block">
+                <h4><i class="fas fa-hourglass-half"></i> 长期持有 — ${s.holding.score}分</h4>
+                <div class="dyp-detail-meta">
+                    <div class="dyp-meta-item"><span class="label">持有性质</span><span class="value" style="font-size:0.8rem">${s.holding.yearsHeld}</span></div>
+                    <div class="dyp-meta-item"><span class="label">回购收益率</span><span class="value">${s.holding.buybackYield}%</span></div>
+                    <div class="dyp-meta-item"><span class="label">连续分红增长</span><span class="value">${s.holding.divGrowthYears}年</span></div>
+                </div>
+                <div class="dyp-detail-text">${s.holding.detail}</div>
+            </div>
+            <div class="cs-ai-insight">
+                <h4><i class="fas fa-robot"></i> AI 综合建议</h4>
+                <p>${s.aiInsight}</p>
+            </div>
+        `;
+
+        document.getElementById('dypDetailSection').style.display = 'block';
+        document.getElementById('dypDetailSection').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    document.getElementById('closeDypDetail')?.addEventListener('click', () => {
+        document.getElementById('dypDetailSection').style.display = 'none';
+    });
+
+    renderDuanYongping();
+
 })();

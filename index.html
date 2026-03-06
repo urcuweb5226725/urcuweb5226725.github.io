@@ -47,6 +47,9 @@
             <li class="nav-item" data-module="minervini">
                 <i class="fas fa-crosshairs"></i><span>VCP 猎手</span>
             </li>
+            <li class="nav-item" data-module="duanyongping">
+                <i class="fas fa-yin-yang"></i><span>段永平选股</span>
+            </li>
         </ul>
         <div class="sidebar-footer">
             <div class="market-status">
@@ -606,6 +609,54 @@
                         <button class="btn-sm" id="closeCanslimDetail"><i class="fas fa-times"></i> 关闭</button>
                     </div>
                     <div class="card-body" id="canslimDetail"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Duan Yongping Value Framework -->
+        <section class="module" id="mod-duanyongping">
+            <div class="module-header">
+                <h1>段永平价值选股法</h1>
+                <p class="subtitle">"买股票就是买公司" — 商业模式 &times; 企业文化 &times; 安全边际 &times; 长期持有</p>
+            </div>
+            <div class="dyp-philosophy">
+                <div class="dyp-pillar">
+                    <div class="dyp-pillar-icon"><i class="fas fa-eye"></i></div>
+                    <div class="dyp-pillar-name">看懂生意</div>
+                    <div class="dyp-pillar-desc">商业模式简单清晰，能用一句话说清赚钱逻辑</div>
+                </div>
+                <div class="dyp-pillar">
+                    <div class="dyp-pillar-icon"><i class="fas fa-heart"></i></div>
+                    <div class="dyp-pillar-name">企业文化</div>
+                    <div class="dyp-pillar-desc">管理层诚信正直，对股东负责，长期导向</div>
+                </div>
+                <div class="dyp-pillar">
+                    <div class="dyp-pillar-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="dyp-pillar-name">安全边际</div>
+                    <div class="dyp-pillar-desc">好公司也要好价格，用合理估值买入</div>
+                </div>
+                <div class="dyp-pillar">
+                    <div class="dyp-pillar-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="dyp-pillar-name">长期持有</div>
+                    <div class="dyp-pillar-desc">"做时间的朋友"，不做短线投机</div>
+                </div>
+            </div>
+            <div class="dyp-results">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-yin-yang"></i> 段永平框架评估排行</h3>
+                        <span class="badge badge-success">AI 量化</span>
+                    </div>
+                    <div class="card-body" id="dypRanking"></div>
+                </div>
+            </div>
+            <div class="dyp-detail-section" id="dypDetailSection" style="display:none">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-microscope"></i> <span id="dypDetailTitle">个股详情</span></h3>
+                        <button class="btn-sm" id="closeDypDetail"><i class="fas fa-times"></i> 关闭</button>
+                    </div>
+                    <div class="card-body" id="dypDetail"></div>
                 </div>
             </div>
         </section>

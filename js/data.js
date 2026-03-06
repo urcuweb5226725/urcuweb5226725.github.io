@@ -730,6 +730,306 @@ const MINERVINI_VCP = [
     },
 ];
 
+// === Duan Yongping Value Framework Data ===
+const DYP_STOCKS = [
+    {
+        ticker: "AAPL", name: "Apple Inc.", price: 198.50,
+        totalScore: 91,
+        verdict: "典型段永平风格标的",
+        narrative: "苹果是段永平最推崇的公司之一——他本人就是苹果的长期持有者。商业模式极其简单：卖硬件+服务生态锁定用户。Tim Cook虽不如乔布斯有魅力，但在运营和股东回报上堪称完美。20亿活跃设备的生态护城河，不是任何竞争者能轻易打破的。唯一问题：现在估值不算便宜。",
+        business: {
+            score: 95,
+            model: "硬件+服务生态",
+            moat: "20亿活跃设备的封闭生态系统，用户转换成本极高",
+            oneLiner: "卖手机电脑+从生态系统里抽成",
+            understandable: true,
+            detail: "苹果的生意用一句话就能说清：做最好的消费电子产品，然后从生态里持续赚钱。App Store 30%抽成、iCloud订阅、Apple Music、Apple Pay——每一个都是\"睡后收入\"。段永平最看重的就是这种\"简单到傻瓜都能经营\"的商业模式。"
+        },
+        culture: {
+            score: 88,
+            ceoIntegrity: 92,
+            shareholderFriendly: 95,
+            longTermThinking: 85,
+            detail: "Tim Cook 是极其诚信和股东友好的CEO：每年$900亿回购+持续提升分红。在隐私保护上选择与用户站在一起而非追逐短期广告收入——这是长期主义的体现。扣分项：在中国市场的态度有时显得摇摆。"
+        },
+        margin: {
+            score: 82,
+            currentPE: 28.5,
+            historicalPE: "22-35",
+            fairValue: 175,
+            marginOfSafety: -13.4,
+            detail: "当前PE 28.5x处于历史中位偏高。段永平的标准是\"好价格才出手\"——目前苹果不算贵但也不便宜。如果回调到$170-175区间(PE~24x)，安全边际会更充足。段永平本人在$100以下开始大量买入。"
+        },
+        holding: {
+            score: 98,
+            yearsHeld: "段永平持有超10年",
+            buybackYield: 3.8,
+            divGrowthYears: 12,
+            detail: "这是段永平最核心的持仓之一。苹果连续12年提高分红，年均回购$900亿。做时间的朋友——过去10年苹果总回报超过800%。段永平的忠告：\"如果你不愿意持有一只股票10年，那就不要持有10分钟。\""
+        },
+        aiInsight: "AAPL 是段永平投资哲学的完美体现：简单易懂的商业模式、极其优秀的企业文化、强大的回购+分红。唯一不足是当前估值不在\"击球区\"。AI建议：耐心等待回调到$170-175区间，或者在当前价位小仓位建仓后逢低加仓。段永平式投资的关键是\"不追高\"。"
+    },
+    {
+        ticker: "GOOGL", name: "Alphabet Inc.", price: 172.80,
+        totalScore: 84,
+        verdict: "高性价比的优质标的",
+        narrative: "Google是一台印钞机——搜索广告的商业模式简单到不能再简单：用户搜索，广告商付费。但段永平可能会问：AI会不会颠覆这个模式？答案是不确定的。好消息是PE只有22倍，是科技巨头里最便宜的。而且YouTube和Cloud都在高速增长。这是一个\"不完美但便宜\"的选择。",
+        business: {
+            score: 85,
+            model: "广告+云计算",
+            moat: "搜索引擎90%市场份额，YouTube视频垄断，Android生态",
+            oneLiner: "用户搜索/看视频，广告商付费",
+            understandable: true,
+            detail: "Google的核心生意极其简单：提供免费搜索和视频服务，然后卖广告。全球90%搜索份额+YouTube=不可替代的流量入口。段永平会认可这种\"收税站\"模式。但AI搜索对广告模式的冲击是一个需要观察的不确定因素。"
+        },
+        culture: {
+            score: 78,
+            ceoIntegrity: 80,
+            shareholderFriendly: 75,
+            longTermThinking: 82,
+            detail: "Sundar Pichai 领导下的Google技术实力强大，但在股东回报上不如苹果（回购力度偏小、分红刚开始）。双层股权结构让创始人保持控制权——这是一把双刃剑。好处是长期思维，坏处是小股东话语权有限。"
+        },
+        margin: {
+            score: 90,
+            currentPE: 22.1,
+            historicalPE: "20-35",
+            fairValue: 190,
+            marginOfSafety: 9.1,
+            detail: "PE 22.1x是科技巨头中最低的，接近历史底部区间。以段永平的标准，这是难得的\"好价格\"区间。如果AI搜索的担忧被证明是过度悲观的，当前价位可能是绝佳买点。安全边际约9%。"
+        },
+        holding: {
+            score: 82,
+            yearsHeld: "中长期标的",
+            buybackYield: 1.5,
+            divGrowthYears: 1,
+            detail: "2024年刚开始分红，回购力度在增加。Google的问题是把大量利润投入\"登月计划\"（Waymo、量子计算等），短期影响自由现金流。段永平可能会说：\"这些投资如果成功回报巨大，但确定性不够。\""
+        },
+        aiInsight: "GOOGL 在段永平框架下是\"安全边际\"得分最高的科技巨头——PE 22x接近历史底部。商业模式清晰简单（搜索卖广告），护城河深。主要风险是AI对搜索广告的长期影响——段永平会说\"看不懂的部分要打折扣\"。AI建议：当前价位可以开始建仓，但要理解AI搜索的不确定性。"
+    },
+    {
+        ticker: "BRK.B", name: "Berkshire Hathaway", price: 458.20,
+        totalScore: 89,
+        verdict: "\"买入并忘记\"的终极标的",
+        narrative: "巴菲特的伯克希尔是段永平最尊敬的公司——不是因为股价涨得多，而是因为巴菲特的\"owner mentality\"（企业主心态）和段永平的投资哲学如出一辙。买BRK.B等于买入了一篮子优质企业+$1680亿现金储备+Warren Buffett和Greg Abel的管理智慧。唯一风险：后巴菲特时代。",
+        business: {
+            score: 88,
+            model: "保险浮存金+多元企业集团",
+            moat: "保险浮存金提供零成本杠杆，旗下企业涵盖铁路、能源、消费品",
+            oneLiner: "用保险的钱去投资和收购好公司",
+            understandable: true,
+            detail: "伯克希尔的模式是：通过保险业务（GEICO等）收取保费，用这些\"免费的钱\"去投资股票和收购企业。这是巴菲特和段永平共同推崇的\"永久资本\"模式——没有赎回压力，可以真正做长期投资。"
+        },
+        culture: {
+            score: 98,
+            ceoIntegrity: 99,
+            shareholderFriendly: 95,
+            longTermThinking: 99,
+            detail: "巴菲特是企业文化的终极标杆：每年致股东信、从不忽悠、不做华而不实的并购、合理薪酬。Greg Abel作为继任者延续了这种文化。段永平说过\"跟对人\"——BRK.B的管理团队是最值得信赖的。"
+        },
+        margin: {
+            score: 80,
+            currentPE: 12.5,
+            historicalPE: "10-18",
+            fairValue: 480,
+            marginOfSafety: 4.5,
+            detail: "PE 12.5x处于历史合理区间，$1680亿现金储备提供了额外的安全垫。巴菲特自己的回购标准是PB<1.5x（目前PB=1.6x）。段永平的评价：\"BRK永远不会让你暴富，但也永远不会让你亏大钱。\""
+        },
+        holding: {
+            score: 95,
+            yearsHeld: "终身持有标的",
+            buybackYield: 2.1,
+            divGrowthYears: 0,
+            detail: "不分红但通过回购回馈股东——这是巴菲特认为更税效的方式。段永平和巴菲特在\"不分红、靠回购\"这个理念上完全一致。这是一个你可以买了放20年不用管的股票。"
+        },
+        aiInsight: "BRK.B 在企业文化评分上是满分级别——巴菲特+Abel的组合是段永平最推崇的管理团队。商业模式虽然复杂（多元集团），但核心逻辑简单（用保险浮存金投资好公司）。AI建议：任何时候买入BRK.B都不会太错，但最佳买点是在大盘恐慌时——巴菲特的$1680亿现金就是为了等那个时刻。"
+    },
+    {
+        ticker: "MSFT", name: "Microsoft Corp.", price: 415.30,
+        totalScore: 86,
+        verdict: "优秀但估值需关注",
+        narrative: "微软在Satya Nadella手下完成了科技史上最成功的转型——从卖Windows许可证变成了云+AI的订阅制帝国。Azure和Microsoft 365的订阅收入就像\"高速公路收费站\"，每个月自动到账。Copilot AI正在给这个收费站再加一条新的收费通道。段永平会欣赏这种\"又宽又深\"的护城河。",
+        business: {
+            score: 92,
+            model: "云计算+SaaS订阅",
+            moat: "企业IT基础设施深度绑定，Office/Azure/GitHub形成完整生态",
+            oneLiner: "企业用微软的云和办公软件，按月交钱",
+            understandable: true,
+            detail: "微软的生意模式现在非常简单：企业需要办公软件（Microsoft 365）和云服务（Azure），这两样都是按月/年订阅。客户一旦用上就很难切换。Copilot AI把ARPU往上推——从$12.5/月变成$42.5/月。这是段永平最喜欢的\"躺着赚钱\"模式。"
+        },
+        culture: {
+            score: 90,
+            ceoIntegrity: 92,
+            shareholderFriendly: 88,
+            longTermThinking: 92,
+            detail: "Satya Nadella 是过去十年最优秀的科技CEO之一——他把微软从\"傲慢的垄断者\"变成了\"谦逊的合作伙伴\"。对OpenAI的投资展现了战略眼光。股东回报持续提升（分红+回购）。段永平会说：\"这个CEO值得信赖。\""
+        },
+        margin: {
+            score: 72,
+            currentPE: 35.2,
+            historicalPE: "25-40",
+            fairValue: 380,
+            marginOfSafety: -9.3,
+            detail: "PE 35.2x处于历史中位偏高。以段永平\"好公司+好价格\"的标准，当前估值谈不上便宜。AI资本支出激增（年$500亿+）也在消耗现金流。如果能回调到PE 28-30x区间会更理想。"
+        },
+        holding: {
+            score: 90,
+            yearsHeld: "长期配置标的",
+            buybackYield: 1.8,
+            divGrowthYears: 22,
+            detail: "连续22年提高分红，\"股息贵族\"之一。回购规模持续增长。微软的订阅制模式保证了稳定的现金流，是\"做时间的朋友\"的好选择。"
+        },
+        aiInsight: "MSFT 商业模式和企业文化都是顶级水平，Nadella治下的微软是段永平会欣赏的那种\"好公司\"。但当前PE 35x意味着安全边际不足。AI建议：这是一个长期必配的标的，但段永平式投资强调\"等好价格\"——建议在$350-370区间（PE 28-30x）加大仓位。现在可以小仓位持有。"
+    },
+    {
+        ticker: "KO", name: "Coca-Cola", price: 62.80,
+        totalScore: 85,
+        verdict: "段永平+巴菲特双认证",
+        narrative: "可口可乐是\"看得懂的生意\"的终极代表——全世界的人都要喝水和饮料，而可口可乐卖的本质上是糖水+品牌。巴菲特持有了38年，段永平也多次推荐。这种公司不会让你暴富，但它就像一台永不停转的印钞机：每天卖出22亿份饮料，每年稳定提高分红。这是\"确定性\"的代名词。",
+        business: {
+            score: 98,
+            model: "品牌授权+浓缩液销售",
+            moat: "全球第一饮料品牌，200+国家分销网络，消费者心智垄断",
+            oneLiner: "把糖水卖到全世界每个角落",
+            understandable: true,
+            detail: "可口可乐的生意简单到小学生都懂：做浓缩液卖给装瓶厂，装瓶厂做出饮料卖给消费者。品牌是核心资产——\"Coca-Cola\"是全球最有价值的品牌之一。段永平和巴菲特都认为：生意越简单越好，因为简单的生意很难被搞砸。"
+        },
+        culture: {
+            score: 82,
+            ceoIntegrity: 85,
+            shareholderFriendly: 90,
+            longTermThinking: 78,
+            detail: "可口可乐是股东友好的典范——连续62年提高分红（\"红利之王\"）。管理层稳定但不算特别有远见。在健康饮品转型上动作偏慢。段永平会说：\"管理层中规中矩，但生意模式本身不需要天才来经营。\""
+        },
+        margin: {
+            score: 78,
+            currentPE: 23.5,
+            historicalPE: "20-30",
+            fairValue: 58,
+            marginOfSafety: -8.3,
+            detail: "PE 23.5x在历史中位，不算便宜。作为防御型消费股，段永平可能会说\"好公司但不是好价格\"。最佳买点在PE<22x时出现，通常在大盘下跌时才有机会。"
+        },
+        holding: {
+            score: 95,
+            yearsHeld: "终身持有标的",
+            buybackYield: 0.8,
+            divGrowthYears: 62,
+            detail: "连续62年提高分红——这是人类商业史上最长的分红增长记录之一。巴菲特持有38年从未卖出。这种\"确定性\"正是段永平投资哲学的核心：\"你不需要做很多对的事，只要不做错的事。\""
+        },
+        aiInsight: "KO 是段永平\"看懂生意\"维度的满分标的——全世界最简单的商业模式。62年分红增长记录证明了\"做时间的朋友\"的威力。AI建议：这不是一个让你暴富的股票，但它是投资组合的\"压舱石\"。当前估值合理但不算便宜，最佳策略是定投——在市场恐慌时加仓。"
+    },
+    {
+        ticker: "COST", name: "Costco", price: 892.50,
+        totalScore: 82,
+        verdict: "优秀模式，估值偏贵",
+        narrative: "Costco是段永平喜欢的那种\"反直觉\"好生意：它故意不靠卖货赚钱（毛利率压到11%），而是靠会员费赚钱。7000万会员每年交$60-120，续费率高达93%——这是一种\"订阅制零售\"。Charlie Munger说Costco是他最想带进棺材的公司。问题是：PE 53倍，真的太贵了。",
+        business: {
+            score: 90,
+            model: "会员制仓储零售",
+            moat: "极致低价+93%会员续费率+独特购物体验",
+            oneLiner: "收会员费，然后以最低价格卖东西",
+            understandable: true,
+            detail: "Costco的生意模式独特而简单：商品几乎不赚钱（毛利率11%），利润全部来自会员费。这意味着它和顾客的利益完全一致——帮顾客省的钱越多，会员越愿意续费。段永平会欣赏这种\"利他即利己\"的商业逻辑。"
+        },
+        culture: {
+            score: 92,
+            ceoIntegrity: 90,
+            shareholderFriendly: 85,
+            longTermThinking: 95,
+            detail: "Costco的企业文化极其优秀：员工薪酬是零售业最高的（减少流失率），对供应商公平（建立长期关系），对顾客诚实（从不在质量上偷工减料）。创始人Jim Sinegal的理念：\"善待员工和顾客，利润会自然来。\"这和段永平的\"做正确的事\"完全吻合。"
+        },
+        margin: {
+            score: 58,
+            currentPE: 52.8,
+            historicalPE: "30-55",
+            fairValue: 650,
+            marginOfSafety: -37.3,
+            detail: "PE 52.8x处于历史高位——即使是段永平也会说\"太贵了\"。好公司不等于好投资——在PE>50时买入Costco，需要很多年的增长才能消化估值。段永平的原则：\"宁可错过，不可做错。\""
+        },
+        holding: {
+            score: 85,
+            yearsHeld: "长期关注标的",
+            buybackYield: 0.8,
+            divGrowthYears: 20,
+            detail: "连续20年提高分红，偶尔发放特别分红。会员费提价的能力保证了长期收益增长。但当前估值意味着如果你现在买入，\"做时间的朋友\"需要更多耐心。"
+        },
+        aiInsight: "COST 商业模式和企业文化都是A+级别——Munger说\"这是他见过的最好的零售企业\"。但段永平投资的关键是\"好价格\"，PE 53x严重缺乏安全边际。AI建议：加入关注清单，等大盘回调或增速放缓导致估值回归PE 35-40x区间时再出手。这是一个\"永远想买但很难买到好价格\"的股票。"
+    },
+    {
+        ticker: "META", name: "Meta Platforms", price: 585.20,
+        totalScore: 76,
+        verdict: "好生意但文化存疑",
+        narrative: "Meta的广告业务是印钞机——30亿人每天刷Facebook/Instagram/WhatsApp，广告商愿意为精准投放付高价。AI推荐引擎让广告效果更好，形成飞轮效应。但段永平可能会皱眉：扎克伯格在元宇宙上烧了$500亿，这不像\"正确的事\"。好在他已经在收手了。",
+        business: {
+            score: 88,
+            model: "社交媒体广告",
+            moat: "30亿用户社交图谱+AI精准广告+网络效应",
+            oneLiner: "用免费社交App吸引用户，然后卖广告",
+            understandable: true,
+            detail: "Meta的核心生意简单明了：提供免费的社交平台，用户花时间刷信息流，Meta在信息流里插入精准广告。30亿用户的社交图谱是不可复制的资产。AI推荐算法让广告更精准、更赚钱。段永平会认可这种\"垄断用户注意力\"的商业模式。"
+        },
+        culture: {
+            score: 62,
+            ceoIntegrity: 60,
+            shareholderFriendly: 70,
+            longTermThinking: 65,
+            detail: "这是Meta最大的软肋。扎克伯格在元宇宙上的\"豪赌\"（累计亏损$500亿+）严重损害了股东利益。双层股权结构让他不需要对任何人负责。段永平会说：\"CEO不够诚信——说要做社交，结果把钱烧在VR头盔上。\"不过2024年以来已明显转向AI，情况在改善。"
+        },
+        margin: {
+            score: 80,
+            currentPE: 24.3,
+            historicalPE: "15-35",
+            fairValue: 550,
+            marginOfSafety: -6.4,
+            detail: "PE 24.3x在科技股中属于合理偏低。考虑到35%的利润率和AI广告引擎的增长潜力，估值不算贵。如果回调到PE 20x以下会更有吸引力。"
+        },
+        holding: {
+            score: 72,
+            yearsHeld: "中期配置",
+            buybackYield: 2.5,
+            divGrowthYears: 1,
+            detail: "2024年开始分红，回购力度大。但Reality Labs持续烧钱是不确定因素。段永平可能不会把它作为核心持仓——因为CEO的\"可预测性\"不够。"
+        },
+        aiInsight: "META 在段永平框架下呈现矛盾：商业模式A级（简单、高利润、有护城河），但企业文化C级（CEO独断、元宇宙烧钱）。段永平的原则是\"跟对人\"——扎克伯格的不可预测性是最大减分项。AI建议：如果你能接受CEO风险，PE 24x的Meta是性价比不错的选择。但这不是\"买了忘记\"型的股票。"
+    },
+    {
+        ticker: "NVDA", name: "NVIDIA Corp.", price: 875.50,
+        totalScore: 70,
+        verdict: "伟大公司，不符合安全边际",
+        narrative: "NVDA是这个时代最伟大的科技公司之一——它定义了AI计算的基础设施。但段永平会说：\"这个生意我看不太懂。\" 芯片行业变化太快，今天的霸主不一定是5年后的霸主（想想Intel）。而且PE 55倍意味着市场已经把未来5年的增长都算进了价格。好公司≠好投资。",
+        business: {
+            score: 75,
+            model: "AI芯片设计+CUDA生态",
+            moat: "CUDA软件生态锁定开发者，GPU性能领先",
+            oneLiner: "设计AI训练/推理芯片，卖给云计算公司",
+            understandable: false,
+            detail: "NVDA的生意不算简单——你需要理解GPU架构、AI训练vs推理、CUDA生态等技术概念。段永平的原则是\"看不懂就不投\"——芯片行业的技术迭代速度太快，今天的领先者可能被下一代架构颠覆。段永平投资过步步高和OPPO/vivo，他了解硬件行业的残酷竞争。"
+        },
+        culture: {
+            score: 85,
+            ceoIntegrity: 88,
+            shareholderFriendly: 80,
+            longTermThinking: 88,
+            detail: "黄仁勋是一位优秀的CEO——远见、执行力、技术判断力都是顶级的。但他倾向于激进投资新领域（汽车、机器人、医疗），这增加了不确定性。股东回报在改善（开始分红、加大回购）。段永平会认可黄仁勋的能力，但担心行业变化太快。"
+        },
+        margin: {
+            score: 48,
+            currentPE: 55.3,
+            historicalPE: "25-70",
+            fairValue: 600,
+            marginOfSafety: -45.9,
+            detail: "PE 55.3x严重缺乏安全边际。即使考虑到强劲增长，当前价格已经透支了大量未来预期。段永平会说：\"这个价格买入，你需要一切都完美才能赚钱——而现实中很少有事情是完美的。\""
+        },
+        holding: {
+            score: 62,
+            yearsHeld: "不适合段永平式长期持有",
+            buybackYield: 0.5,
+            divGrowthYears: 3,
+            detail: "分红刚起步，回购规模相对利润偏小。更重要的是：科技硬件公司的\"长期持有\"风险较高——段永平亲身经历过VCD/DVD行业的兴衰，深知硬件行业没有\"永远的护城河\"。"
+        },
+        aiInsight: "NVDA 在段永平框架下得分不高——不是因为公司不好，而是因为\"看不太懂+太贵\"。段永平的投资哲学强调确定性：简单的生意、诚信的管理层、合理的价格。NVDA在第1和第3条上都打了折扣。AI建议：如果你比段永平更懂AI芯片行业，可以考虑。否则\"不懂就不投\"是更安全的选择。"
+    }
+];
+
 const AI_PICKS = [
     { ticker: "TSM", name: "台积电", score: 93, reason: "AI 算力军备竞赛核心供应商，NVDA/AAPL/AMD 三大客户同步增长", tags: ["tag-chain", "供应链"] },
     { ticker: "GOOGL", name: "Alphabet", score: 88, reason: "PE 处于历史低位，AI 搜索变革虽有风险但云业务增速强劲", tags: ["tag-value", "价值"] },

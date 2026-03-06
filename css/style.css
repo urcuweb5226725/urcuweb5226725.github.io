@@ -1836,6 +1836,194 @@ body {
     line-height: 1.6;
 }
 
+/* === Duan Yongping Framework === */
+.dyp-philosophy {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.dyp-pillar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.dyp-pillar:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-2px);
+}
+
+.dyp-pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--accent-orange);
+}
+
+.dyp-pillar-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.dyp-pillar-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.dyp-stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dyp-stock-card:hover {
+    border-color: var(--accent-orange);
+    background: var(--bg-card-hover);
+}
+
+.dyp-stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dyp-stock-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.dyp-stock-name small {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.dyp-verdict {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--accent-orange);
+    font-weight: 600;
+}
+
+.dyp-scores-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.dyp-score-item {
+    text-align: center;
+}
+
+.dyp-score-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.dyp-score-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.dyp-narrative-preview {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding: 10px 14px;
+    background: rgba(245, 158, 11, 0.05);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.dyp-detail-block {
+    margin-bottom: 20px;
+}
+
+.dyp-detail-block h4 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--accent-orange);
+}
+
+.dyp-detail-block h4 i {
+    margin-right: 6px;
+}
+
+.dyp-detail-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+}
+
+.dyp-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.dyp-meta-item {
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    text-align: center;
+}
+
+.dyp-meta-item .label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+.dyp-meta-item .value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.dyp-margin-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--bg-primary);
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.dyp-margin-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s;
+}
+
+@media (max-width: 1200px) {
+    .dyp-philosophy { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .dyp-philosophy { grid-template-columns: 1fr 1fr; }
+    .dyp-scores-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* === Responsive === */
 @media (max-width: 1200px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
