@@ -428,6 +428,111 @@ const SIGNAL_FEED = [
     { type: "squeeze", icon: "fa-fire-alt", title: "情绪背离：INTC 基本面改善但情绪极差", desc: "情绪评分仅 18 vs 基本面 62，可能存在反转机会", time: "6小时前" },
 ];
 
+// === CAN SLIM Data ===
+const CANSLIM_STOCKS = [
+    {
+        ticker: "NVDA", name: "NVIDIA Corp.", price: 875.50,
+        C: { score: 95, epsGrowth: 265, detail: "当季EPS $5.16 vs 去年 $1.42，同比增长 265%。连续 4 季度加速增长。" },
+        A: { score: 92, annualGrowth: [45, 62, 85, 122, 265], detail: "年度EPS: $2.1→$3.4→$6.3→$14.0→$20.8，5年复合增长58%。承诺兑现率: 92%。" },
+        N: { score: 88, events: ["Blackwell Ultra架构发布", "数据中心AI推理芯片需求爆发", "股价创历史新高"], detail: "Blackwell Ultra 架构代表 AI 芯片技术突破，AI 推理市场是全新增长引擎。近52周新高。" },
+        S: { score: 82, volumeRatio: 1.8, floatShort: 1.2, detail: "近期成交量为50日均量的1.8倍，放量上涨。流通股空头占比仅1.2%，卖压极小。" },
+        L: { score: 90, rsRating: 95, industryRank: 1, detail: "RS评级95（满分99），半导体行业排名第1。过去12个月跑赢95%的股票。" },
+        I: { score: 88, fundCount: 5200, fundChange: "+180", detail: "5200只基金持有，较上季度增加180只。Citadel、Renaissance等顶级基金大幅增持。" },
+        M: { score: 65, detail: "大盘处于震荡区间，VIX=18.5。纳斯达克在50日均线上方但弱于200日均线。市场环境中性偏弱。" },
+        total: 88, aiInsight: "NVDA 在 CAN SLIM 7因子中表现极为突出，C/A/L 三项近乎满分。唯一风险是 M（大盘方向）评分偏低——欧奈尔的原则是大盘不好时减少仓位。AI 增强分析显示：管理层承诺兑现率92%（叙事验证器数据），且供应链上游（TSM、SMCI）同步走强，确认需求真实。建议：等待大盘确认上行趋势后入场。"
+    },
+    {
+        ticker: "META", name: "Meta Platforms", price: 585.20,
+        C: { score: 85, epsGrowth: 35, detail: "当季EPS $6.20 vs 去年 $4.59，同比增长 35%。AI广告推荐引擎持续推动增长。" },
+        A: { score: 88, annualGrowth: [-2, 15, 45, 72, 35], detail: "年度EPS从2022年低谷强劲反弹。5年EPS: $10.1→$8.6→$14.9→$22.1→$25.8。" },
+        N: { score: 82, events: ["Llama 4开源模型发布", "AI广告推荐系统升级", "Reels营收增速翻倍"], detail: "开源AI战略形成生态护城河，AI推荐系统是核心新产品驱动力。" },
+        S: { score: 78, volumeRatio: 1.3, floatShort: 0.8, detail: "成交量温和放大，流通股空头占比极低(0.8%)。股票回购减少了流通股供给。" },
+        L: { score: 85, rsRating: 88, industryRank: 1, detail: "RS评级88，社交媒体行业领导者。过去12个月跑赢88%的股票。" },
+        I: { score: 90, fundCount: 4800, fundChange: "+220", detail: "4800只基金持有，增加220只。Bridgewater、Pershing Square 等价值型基金新增持仓。" },
+        M: { score: 65, detail: "同上，大盘环境中性偏弱。" },
+        total: 84, aiInsight: "META 在 CAN SLIM 框架下表现稳健，I（机构持仓）评分最高，说明聪明钱看好。AI增强分析：Llama开源策略虽然短期不赚钱，但构建了开发者生态（类似Android策略）。广告AI推荐引擎是真正的'N'因子——它不是概念炒作，已经在财报中兑现为18%的广告增长。Reality Labs亏损是主要拖累。"
+    },
+    {
+        ticker: "TSM", name: "台积电 TSMC", price: 185.30,
+        C: { score: 90, epsGrowth: 58, detail: "当季EPS同比增长58%，AI芯片代工需求爆发，先进制程(3nm/5nm)产能满载。" },
+        A: { score: 85, annualGrowth: [25, -8, 18, 35, 58], detail: "2023年低谷后V型反弹。5年趋势：$5.2→$6.5→$5.9→$7.0→$9.5→$15.0。" },
+        N: { score: 92, events: ["2nm制程2025量产", "日本/美国建厂推进", "CoWoS先进封装产能扩张3倍"], detail: "2nm技术领先全球，CoWoS封装是AI芯片瓶颈的关键解决方案，属于革命性新产品。" },
+        S: { score: 75, volumeRatio: 1.4, floatShort: 0.5, detail: "ADR成交量稳步增长，空头极少。但总流通股较大，不属于紧缺型。" },
+        L: { score: 88, rsRating: 91, industryRank: 2, detail: "RS评级91，半导体行业第2（仅次于NVDA）。过去12个月跑赢91%的股票。" },
+        I: { score: 92, fundCount: 2800, fundChange: "+150", detail: "2800只基金持有。Berkshire Hathaway、Tiger Global 均为重仓股。巴菲特的加持是重要信号。" },
+        M: { score: 65, detail: "同上，大盘环境中性偏弱。" },
+        total: 86, aiInsight: "TSM 的'N'因子是所有候选股中最强的——2nm制程和CoWoS封装是真正的技术护城河，不是营销口号。AI供应链分析显示：NVDA、AAPL、AMD三大客户订单同步增长，形成罕见的需求共振。唯一风险：地缘政治（台海）。CAN SLIM框架下，建议以TSM为'供应链联动'核心配置。"
+    },
+    {
+        ticker: "AVGO", name: "Broadcom Inc.", price: 195.80,
+        C: { score: 88, epsGrowth: 45, detail: "当季EPS同比增长45%，AI网络芯片+VMware整合双轮驱动。" },
+        A: { score: 82, annualGrowth: [12, 15, 22, 30, 45], detail: "年度EPS连续5年加速增长，收购VMware后软件业务占比提升至40%。" },
+        N: { score: 78, events: ["定制AI芯片(ASIC)获Google/Meta大单", "VMware云化整合", "近52周新高"], detail: "定制AI芯片业务是新的增长极，为科技巨头量身定制AI加速器。" },
+        S: { score: 72, volumeRatio: 1.2, floatShort: 1.5, detail: "成交量平稳，流通股供给因回购减少。但债务较高（VMware收购）。" },
+        L: { score: 82, rsRating: 85, industryRank: 3, detail: "RS评级85，半导体行业第3。AI ASIC龙头地位巩固。" },
+        I: { score: 85, fundCount: 3200, fundChange: "+95", detail: "3200只基金持有。定制AI芯片赛道获得越来越多长线基金关注。" },
+        M: { score: 65, detail: "同上，大盘环境中性偏弱。" },
+        total: 80, aiInsight: "AVGO的独特价值在于'定制AI芯片'赛道——Google的TPU、Meta的MTIA都依赖Broadcom设计。这是一个NVDA无法完全替代的差异化市场。VMware整合带来的软件复购收入使EPS增长更具可持续性。CAN SLIM角度：C/A连续加速是强信号。"
+    },
+    {
+        ticker: "LLY", name: "Eli Lilly", price: 820.50,
+        C: { score: 92, epsGrowth: 82, detail: "当季EPS同比增长82%，GLP-1减肥药Mounjaro/Zepbound销售爆发。" },
+        A: { score: 78, annualGrowth: [8, -5, 12, 35, 82], detail: "2024年起因GLP-1药物进入指数级增长。年度EPS加速明显。" },
+        N: { score: 95, events: ["Zepbound获批新适应症(睡眠呼吸暂停)", "口服GLP-1进入III期临床", "阿尔茨海默药donanemab获批"], detail: "GLP-1赛道是近10年最大的医药创新。口服版GLP-1可能将市场扩大10倍。多个重磅新药同时推进。" },
+        S: { score: 70, volumeRatio: 1.1, floatShort: 0.8, detail: "成交量正常，流通股规模大。机构持仓集中度高。" },
+        L: { score: 85, rsRating: 87, industryRank: 1, detail: "RS评级87，制药行业绝对领导者。GLP-1赛道无可争议的龙头。" },
+        I: { score: 88, fundCount: 4100, fundChange: "+135", detail: "4100只基金持有，医疗基金几乎全部超配。" },
+        M: { score: 65, detail: "同上。" },
+        total: 83, aiInsight: "LLY的'N'因子是现有CAN SLIM候选股中最具颠覆性的——GLP-1药物正在创造一个$100B级别的全新市场。口服版GLP-1如果成功，将是从'注射'到'口服'的范式转换（类似智能手机替代功能机）。AI新闻分析显示FDA审批概率>75%。风险：竞争加剧（NOVO、AMGN）和产能瓶颈。"
+    },
+    {
+        ticker: "PLTR", name: "Palantir Technologies", price: 78.50,
+        C: { score: 75, epsGrowth: 42, detail: "当季EPS $0.11 vs 去年 $0.08，增长42%。但绝对值仍然较低。" },
+        A: { score: 62, annualGrowth: [-100, -50, 5, 25, 42], detail: "刚从亏损转盈利不久，年度增长趋势向好但历史短。" },
+        N: { score: 85, events: ["AIP平台获大量企业客户", "政府AI安全合规领先", "获新军方合同"], detail: "AIP平台是企业AI部署的新范式，政府安全认证是独特护城河。" },
+        S: { score: 55, volumeRatio: 2.2, floatShort: 3.5, detail: "成交量极高但内部人持续减持。空头占比3.5%值得关注。散户交易占比偏高。" },
+        L: { score: 92, rsRating: 96, industryRank: 1, detail: "RS评级96，AI/数据分析行业第1。过去12个月涨幅185%。" },
+        I: { score: 58, fundCount: 1800, fundChange: "+45", detail: "基金持仓在增加但增速放缓。高估值让很多价值型基金望而却步。" },
+        M: { score: 65, detail: "同上。" },
+        total: 68, aiInsight: "PLTR 呈现典型的CAN SLIM矛盾信号：L评分极高（动量强）但A评分偏低（盈利历史短），S评分最差（内部人减持+散户占比高）。欧奈尔会说这是'投机性成长股'。AI情绪分析显示：社交媒体热度92分但讨论质量仅58分（大量情绪贴缺乏逻辑支撑）。PE=180x，需要极高增长才能撑住。谨慎看待。"
+    },
+    {
+        ticker: "CRWD", name: "CrowdStrike", price: 345.20,
+        C: { score: 80, epsGrowth: 28, detail: "当季EPS同比增长28%。2024年宕机事件影响正在消退，客户流失率低于预期。" },
+        A: { score: 75, annualGrowth: [35, 45, 22, -5, 28], detail: "2024年因宕机事件出现增速放缓，但2025年已强劲反弹。" },
+        N: { score: 72, events: ["Charlotte AI安全助手发布", "宕机事件后安全机制全面升级", "扩展至身份安全领域"], detail: "Charlotte AI是网络安全领域首个AI原生助手。身份安全是新增长点。" },
+        S: { score: 75, volumeRatio: 1.3, floatShort: 2.8, detail: "成交量恢复正常，空头占比2.8%反映部分投资者仍有顾虑。" },
+        L: { score: 78, rsRating: 80, industryRank: 2, detail: "RS评级80，网络安全行业第2。股价已从宕机低点反弹65%。" },
+        I: { score: 82, fundCount: 2600, fundChange: "+88", detail: "Tiger Global大幅增持45%，多家精品基金新建仓。" },
+        M: { score: 65, detail: "同上。" },
+        total: 75, aiInsight: "CRWD 是经典的'逆境反弹'型CAN SLIM候选。宕机事件类似2017年Equifax数据泄露——短期重创但长期反而加固了市场地位（因为切换安全厂商的成本极高）。AI叙事分析：管理层在应对危机后的透明度显著提高，'避重就轻指数'从事件前的45降至25。13F数据显示聪明钱正在悄悄加仓。"
+    },
+    {
+        ticker: "GOOGL", name: "Alphabet Inc.", price: 172.80,
+        C: { score: 78, epsGrowth: 22, detail: "当季EPS同比增长22%。搜索广告稳健，Cloud增速加快，YouTube维持增长。" },
+        A: { score: 80, annualGrowth: [15, -5, 25, 30, 22], detail: "年度EPS稳定增长。$4.5→$5.1→$4.8→$6.0→$7.8→$9.5。" },
+        N: { score: 70, events: ["Gemini 2.0整合进全线产品", "AI Overview改变搜索体验", "Waymo自动驾驶扩展至新城市"], detail: "Gemini是核心新产品，但AI对搜索广告模式的影响仍不确定。Waymo是隐藏的'N'因子。" },
+        S: { score: 72, volumeRatio: 1.0, floatShort: 0.5, detail: "成交量平稳，空头极少。大盘股流通性好但缺乏供需紧张的催化。" },
+        L: { score: 68, rsRating: 72, industryRank: 3, detail: "RS评级72，互联网行业第3（落后于META和AMZN）。表现中规中矩。" },
+        I: { score: 85, fundCount: 5500, fundChange: "+110", detail: "5500只基金持有，机构覆盖极广。Citadel、Renaissance 等增持。" },
+        M: { score: 65, detail: "同上。" },
+        total: 74, aiInsight: "GOOGL 在 CAN SLIM 中呈现'价值+质量'特征，而非典型的高成长型。PE=22是科技巨头中最低的，这不完全是好事——市场在定价AI搜索的风险。AI叙事分析显示：分析师对'AI Overview对广告收入的冲击'这个问题的追问频率很高（语义偏移58%），但管理层的回答偏模糊。适合作为CAN SLIM组合中的'防守型配置'。"
+    }
+];
+
+const CANSLIM_MARKET = {
+    sp500Trend: "中性",
+    sp500Above50ma: true,
+    sp500Above200ma: false,
+    distributionDays: 4,
+    advDecline: 0.92,
+    vix: 18.5,
+    putCallRatio: 1.28,
+    status: "观望",
+    statusColor: "var(--accent-orange)",
+    desc: "S&P 500 在50日均线上方但弱于200日均线。分发日(放量下跌)已累积4天。Put/Call=1.28显示极度恐惧。欧奈尔建议：当前环境下降低仓位至50-75%，只买最强的CAN SLIM候选。"
+};
+
 const AI_PICKS = [
     { ticker: "TSM", name: "台积电", score: 93, reason: "AI 算力军备竞赛核心供应商，NVDA/AAPL/AMD 三大客户同步增长", tags: ["tag-chain", "供应链"] },
     { ticker: "GOOGL", name: "Alphabet", score: 88, reason: "PE 处于历史低位，AI 搜索变革虽有风险但云业务增速强劲", tags: ["tag-value", "价值"] },

@@ -38,6 +38,9 @@
             <li class="nav-item" data-module="narrative">
                 <i class="fas fa-microphone-alt"></i><span>叙事验证</span>
             </li>
+            <li class="nav-item" data-module="canslim">
+                <i class="fas fa-trophy"></i><span>CAN SLIM</span>
+            </li>
         </ul>
         <div class="sidebar-footer">
             <div class="market-status">
@@ -456,6 +459,93 @@
                         <h3><i class="fas fa-align-left"></i> 管理层 vs 分析师 语义对齐</h3>
                     </div>
                     <div class="card-body" id="alignmentAnalysis"></div>
+                </div>
+            </div>
+        </section>
+        <!-- CAN SLIM Module -->
+        <section class="module" id="mod-canslim">
+            <div class="module-header">
+                <h1>CAN SLIM AI 选股系统</h1>
+                <p class="subtitle">威廉·欧奈尔经典选股法 &times; AI 量化增强 — 7 因子自动评分</p>
+            </div>
+
+            <div class="canslim-overview">
+                <div class="canslim-factors">
+                    <div class="cs-factor" data-factor="C">
+                        <div class="cs-letter">C</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Current Earnings</div>
+                            <div class="cs-factor-desc">当季EPS同比增长 &ge;25%</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="A">
+                        <div class="cs-letter">A</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Annual Earnings</div>
+                            <div class="cs-factor-desc">年度EPS连续3-5年增长</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="N">
+                        <div class="cs-letter">N</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">New Products/Highs</div>
+                            <div class="cs-factor-desc">新产品·新管理层·创新高</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="S">
+                        <div class="cs-letter">S</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Supply & Demand</div>
+                            <div class="cs-factor-desc">成交量放大·流通股紧缺</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="L">
+                        <div class="cs-letter">L</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Leader or Laggard</div>
+                            <div class="cs-factor-desc">相对强度RS &ge;80</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="I">
+                        <div class="cs-letter">I</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Institutional Sponsorship</div>
+                            <div class="cs-factor-desc">机构持仓增加·基金数量上升</div>
+                        </div>
+                    </div>
+                    <div class="cs-factor" data-factor="M">
+                        <div class="cs-letter">M</div>
+                        <div class="cs-factor-info">
+                            <div class="cs-factor-name">Market Direction</div>
+                            <div class="cs-factor-desc">大盘趋势确认·跟随市场方向</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canslim-market-bar">
+                <div class="card">
+                    <div class="card-body" id="canslimMarket"></div>
+                </div>
+            </div>
+
+            <div class="canslim-results">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-trophy"></i> CAN SLIM 综合排行</h3>
+                        <span class="badge badge-success">AI 增强</span>
+                    </div>
+                    <div class="card-body" id="canslimRanking"></div>
+                </div>
+            </div>
+
+            <div class="canslim-detail-section" id="canslimDetailSection" style="display:none">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-microscope"></i> <span id="canslimDetailTitle">个股详情</span></h3>
+                        <button class="btn-sm" id="closeCanslimDetail"><i class="fas fa-times"></i> 关闭</button>
+                    </div>
+                    <div class="card-body" id="canslimDetail"></div>
                 </div>
             </div>
         </section>

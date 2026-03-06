@@ -1332,6 +1332,237 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* === CAN SLIM === */
+.canslim-overview { margin-bottom: 20px; }
+
+.canslim-factors {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cs-factor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 180px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cs-factor:hover {
+    border-color: var(--accent-blue);
+    background: var(--bg-card-hover);
+}
+
+.cs-letter {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--gradient-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.cs-factor-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.cs-factor-desc {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.canslim-market-bar { margin-bottom: 20px; }
+
+.canslim-market-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.cs-market-item {
+    text-align: center;
+}
+
+.cs-market-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cs-market-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: block;
+}
+
+.cs-market-status {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.canslim-results { margin-bottom: 20px; }
+
+.cs-rank-item {
+    display: grid;
+    grid-template-columns: 50px 140px 1fr 80px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cs-rank-item:hover { background: var(--bg-card-hover); }
+.cs-rank-item:last-child { border-bottom: none; }
+
+.cs-rank-num {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.cs-rank-ticker {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.cs-rank-name {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.cs-rank-bars {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.cs-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 36px;
+}
+
+.cs-bar-letter {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.cs-bar {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.cs-bar-high { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+.cs-bar-med { background: rgba(245, 158, 11, 0.2); color: var(--accent-orange); }
+.cs-bar-low { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+.cs-rank-total {
+    text-align: center;
+}
+
+.cs-total-score {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.cs-total-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+/* CAN SLIM Detail */
+.canslim-detail-section { margin-top: 20px; }
+
+.cs-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cs-detail-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+}
+
+.cs-detail-letter {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cs-detail-score {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 8px 0;
+}
+
+.cs-detail-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.cs-detail-reason {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.cs-ai-insight {
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.cs-ai-insight h4 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--accent-blue);
+}
+
+.cs-ai-insight p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 /* === Responsive === */
 @media (max-width: 1200px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }

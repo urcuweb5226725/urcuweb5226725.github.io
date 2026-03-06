@@ -628,4 +628,126 @@
     });
     renderNarrative('NVDA');
 
+    // === CAN SLIM ===
+    function renderCanslim() {
+        // Market status bar
+        const m = CANSLIM_MARKET;
+        document.getElementById('canslimMarket').innerHTML = `
+            <div class="canslim-market-inner">
+                <div class="cs-market-item">
+                    <span class="cs-market-label">M因子 · 大盘方向</span>
+                    <span class="cs-market-status" style="background:rgba(245,158,11,0.2);color:var(--accent-orange)">${m.status}</span>
+                </div>
+                <div class="cs-market-item">
+                    <span class="cs-market-label">S&P 500</span>
+                    <span class="cs-market-value">${m.sp500Above50ma ? '> 50MA' : '< 50MA'}</span>
+                </div>
+                <div class="cs-market-item">
+                    <span class="cs-market-label">分发日</span>
+                    <span class="cs-market-value" style="color:${m.distributionDays >= 4 ? 'var(--accent-red)' : 'var(--accent-green)'}">${m.distributionDays} 天</span>
+                </div>
+                <div class="cs-market-item">
+                    <span class="cs-market-label">VIX</span>
+                    <span class="cs-market-value">${m.vix}</span>
+                </div>
+                <div class="cs-market-item">
+                    <span class="cs-market-label">Put/Call</span>
+                    <span class="cs-market-value" style="color:${m.putCallRatio > 1 ? 'var(--accent-red)' : 'var(--accent-green)'}">${m.putCallRatio}</span>
+                </div>
+                <div class="cs-market-item" style="flex:2">
+                    <span class="cs-market-label">AI 解读</span>
+                    <span style="font-size:0.8rem;color:var(--text-secondary)">${m.desc}</span>
+                </div>
+            </div>
+        `;
+
+        // Ranking table
+        const letters = ['C', 'A', 'N', 'S', 'L', 'I', 'M'];
+        const sorted = [...CANSLIM_STOCKS].sort((a, b) => b.total - a.total);
+
+        const rankHtml = sorted.map((s, i) => {
+            const bars = letters.map(l => {
+                const score = s[l].score;
+                const cls = score >= 80 ? 'cs-bar-high' : score >= 60 ? 'cs-bar-med' : 'cs-bar-low';
+                return `<div class="cs-bar-group"><span class="cs-bar-letter">${l}</span><div class="cs-bar ${cls}">${score}</div></div>`;
+            }).join('');
+
+            const totalColor = s.total >= 80 ? 'var(--accent-green)' : s.total >= 65 ? 'var(--accent-orange)' : 'var(--accent-red)';
+
+            return `
+                <div class="cs-rank-item" data-ticker="${s.ticker}">
+                    <div class="cs-rank-num">#${i + 1}</div>
+                    <div>
+                        <div class="cs-rank-ticker">${s.ticker}</div>
+                        <div class="cs-rank-name">${s.name}</div>
+                    </div>
+                    <div class="cs-rank-bars">${bars}</div>
+                    <div class="cs-rank-total">
+                        <span class="cs-total-score" style="color:${totalColor}">${s.total}</span>
+                        <span class="cs-total-label">综合</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        document.getElementById('canslimRanking').innerHTML = rankHtml;
+
+        // Click to show detail
+        document.querySelectorAll('.cs-rank-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const ticker = item.dataset.ticker;
+                renderCanslimDetail(ticker);
+            });
+        });
+    }
+
+    function renderCanslimDetail(ticker) {
+        const s = CANSLIM_STOCKS.find(x => x.ticker === ticker);
+        if (!s) return;
+
+        document.getElementById('canslimDetailSection').style.display = 'block';
+        document.getElementById('canslimDetailTitle').textContent = `${s.ticker} — ${s.name} · CAN SLIM 详细分析`;
+
+        const letters = ['C', 'A', 'N', 'S', 'L', 'I', 'M'];
+        const names = {
+            C: 'Current Earnings', A: 'Annual Earnings', N: 'New Products/Highs',
+            S: 'Supply & Demand', L: 'Leader/Laggard', I: 'Institutional', M: 'Market Direction'
+        };
+
+        const cardsHtml = letters.map(l => {
+            const d = s[l];
+            const color = d.score >= 80 ? 'var(--accent-green)' : d.score >= 60 ? 'var(--accent-orange)' : 'var(--accent-red)';
+            return `
+                <div class="cs-detail-card">
+                    <div class="cs-detail-letter">${l}</div>
+                    <div class="cs-detail-label">${names[l]}</div>
+                    <div class="cs-detail-score" style="color:${color}">${d.score}</div>
+                    <div class="cs-detail-reason">${d.detail}</div>
+                </div>
+            `;
+        }).join('');
+
+        const totalColor = s.total >= 80 ? 'var(--accent-green)' : s.total >= 65 ? 'var(--accent-orange)' : 'var(--accent-red)';
+
+        document.getElementById('canslimDetail').innerHTML = `
+            <div style="text-align:center;margin-bottom:20px">
+                <span style="font-size:3rem;font-weight:800;color:${totalColor}">${s.total}</span>
+                <span style="display:block;font-size:0.85rem;color:var(--text-muted)">CAN SLIM 综合评分</span>
+            </div>
+            <div class="cs-detail-grid">${cardsHtml}</div>
+            <div class="cs-ai-insight">
+                <h4><i class="fas fa-robot"></i> AI 增强分析</h4>
+                <p>${s.aiInsight}</p>
+            </div>
+        `;
+
+        document.getElementById('canslimDetailSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('closeCanslimDetail').addEventListener('click', () => {
+        document.getElementById('canslimDetailSection').style.display = 'none';
+    });
+
+    renderCanslim();
+
 })();
