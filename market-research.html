@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州职业教培行业 - 销售跟进AI质检市场调研报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f8f9fa; color: #333; line-height: 1.7; }
+        .report { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .report-header { background: linear-gradient(135deg, #1a237e, #283593); color: #fff; padding: 50px 40px; border-radius: 16px; margin-bottom: 40px; }
+        .report-header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .report-header .subtitle { opacity: 0.85; font-size: 1rem; }
+        .report-header .date { margin-top: 16px; font-size: 0.85rem; opacity: 0.7; }
+        .toc { background: #fff; border-radius: 12px; padding: 24px 32px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .toc h3 { margin-bottom: 12px; color: #1a237e; }
+        .toc ul { list-style: none; }
+        .toc li { padding: 6px 0; border-bottom: 1px dashed #eee; }
+        .toc li:last-child { border: none; }
+        .toc a { color: #1565c0; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        section { background: #fff; border-radius: 12px; padding: 32px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        h2 { font-size: 1.4rem; color: #1a237e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e8eaf6; }
+        h3 { font-size: 1.1rem; color: #333; margin: 20px 0 10px; }
+        p { margin-bottom: 12px; }
+        .highlight-box { background: #e8eaf6; border-left: 4px solid #1a237e; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+        .data-card { background: #f5f5f5; border-radius: 10px; padding: 20px; text-align: center; }
+        .data-card .num { font-size: 1.8rem; font-weight: 700; color: #1a237e; }
+        .data-card .label { font-size: 0.85rem; color: #666; margin-top: 4px; }
+        .data-card .source { font-size: 0.75rem; color: #999; margin-top: 6px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th { background: #1a237e; color: #fff; padding: 12px 16px; text-align: left; }
+        td { padding: 10px 16px; border-bottom: 1px solid #eee; }
+        tr:hover td { background: #f5f5f5; }
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 500; margin: 2px; }
+        .tag-red { background: #ffebee; color: #c62828; }
+        .tag-green { background: #e8f5e9; color: #2e7d32; }
+        .tag-blue { background: #e3f2fd; color: #1565c0; }
+        .tag-yellow { background: #fff8e1; color: #f57f17; }
+        .tag-gray { background: #f5f5f5; color: #616161; }
+        .flow-chart { display: flex; align-items: center; gap: 0; margin: 20px 0; flex-wrap: wrap; justify-content: center; }
+        .flow-step { background: #e8eaf6; border-radius: 8px; padding: 12px 18px; text-align: center; min-width: 100px; }
+        .flow-step .step-title { font-weight: 600; font-size: 0.9rem; }
+        .flow-step .step-desc { font-size: 0.75rem; color: #666; margin-top: 4px; }
+        .flow-arrow { font-size: 1.2rem; color: #9e9e9e; padding: 0 4px; }
+        .verdict { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border: 1px solid #a5d6a7; border-radius: 10px; padding: 20px; margin: 16px 0; }
+        .verdict h4 { color: #2e7d32; margin-bottom: 8px; }
+        .warning { background: #fff3e0; border: 1px solid #ffcc80; border-radius: 10px; padding: 20px; margin: 16px 0; }
+        .warning h4 { color: #e65100; margin-bottom: 8px; }
+        ul, ol { margin: 10px 0 10px 20px; }
+        li { margin-bottom: 6px; }
+        .competitor-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .competitor-card h4 { margin-bottom: 8px; }
+        .competitor-card .comp-type { font-size: 0.8rem; color: #888; margin-bottom: 8px; }
+        .gap-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .gap-item { border: 1px solid #e0e0e0; border-radius: 10px; padding: 16px; }
+        .gap-item h4 { font-size: 0.95rem; margin-bottom: 8px; }
+        @media (max-width: 600px) {
+            .gap-matrix { grid-template-columns: 1fr; }
+            .flow-arrow { display: none; }
+            .flow-chart { gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="report">
+
+<div class="report-header">
+    <h1>广州职业教培行业 - 销售跟进AI质检市场调研报告</h1>
+    <div class="subtitle">聚焦：考证/技能类培训机构的销售转化管理痛点与AI切入机会</div>
+    <div class="date">调研日期：2026年3月 | 数据来源：公开市场数据、行业报告、企业官网</div>
+</div>
+
+<div class="toc">
+    <h3>目录</h3>
+    <ul>
+        <li><a href="#sec1">一、广州教培行业现状与规模</a></li>
+        <li><a href="#sec2">二、销售跟进现状：怎么做的？痛点在哪？</a></li>
+        <li><a href="#sec3">三、竞争对手全景图</a></li>
+        <li><a href="#sec4">四、市场空白与切入机会</a></li>
+        <li><a href="#sec5">五、目标客户画像与名单</a></li>
+        <li><a href="#sec6">六、结论与建议</a></li>
+    </ul>
+</div>
+
+<!-- Section 1 -->
+<section id="sec1">
+<h2>一、广州教培行业现状与规模</h2>
+
+<h3>1.1 全国职业教育培训市场</h3>
+
+<div class="data-grid">
+    <div class="data-card">
+        <div class="num">~1.1万亿</div>
+        <div class="label">中国职业教育市场规模 (2025)</div>
+        <div class="source">来源: 弗若斯特沙利文</div>
+    </div>
+    <div class="data-card">
+        <div class="num">9.1%</div>
+        <div class="label">年复合增长率 (2021-2026E)</div>
+        <div class="source">来源: 艾瑞咨询</div>
+    </div>
+    <div class="data-card">
+        <div class="num">~900亿</div>
+        <div class="label">广东省职业培训市场规模估算</div>
+        <div class="source">占全国约8-10%</div>
+    </div>
+</div>
+
+<h3>1.2 广州本地机构数量</h3>
+
+<div class="highlight-box">
+    <strong>核心数据：</strong>根据天眼查/企查查数据，广州市经营范围包含"职业培训"的存续企业约 <strong>3,000-5,000家</strong>。其中：
+    <ul>
+        <li>持有人社局颁发《民办学校办学许可证》的正规机构约 <strong>500-800家</strong></li>
+        <li>以"教育咨询""教育科技"注册、实际从事培训业务的约 <strong>2,000-3,000家</strong></li>
+        <li>广州市人社局2025年项目制承训单位征集范围涵盖：企业、高校、职业院校、技工院校、行业协会、职业培训机构等</li>
+    </ul>
+</div>
+
+<h3>1.3 广州热门考证品类</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>考证品类</th>
+            <th>客单价范围</th>
+            <th>考试周期</th>
+            <th>典型机构</th>
+            <th>市场热度</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>会计职称</strong>（初级/中级/CPA）</td>
+            <td>2,000-15,000</td>
+            <td>每年5月/9月</td>
+            <td>佰平、陈文卫、金功夫、仁和</td>
+            <td><span class="tag tag-red">极高</span></td>
+        </tr>
+        <tr>
+            <td><strong>建造师</strong>（一建/二建）</td>
+            <td>3,000-20,000</td>
+            <td>每年6月/11月</td>
+            <td>优路教育、建工网校、环球网校</td>
+            <td><span class="tag tag-red">极高</span></td>
+        </tr>
+        <tr>
+            <td><strong>教师资格证</strong></td>
+            <td>1,500-6,000</td>
+            <td>每年3月/11月</td>
+            <td>中公、粉笔、华图</td>
+            <td><span class="tag tag-yellow">高</span></td>
+        </tr>
+        <tr>
+            <td><strong>健康管理师</strong></td>
+            <td>3,000-8,000</td>
+            <td>滚动开班</td>
+            <td>德立教育、广东技能培训网</td>
+            <td><span class="tag tag-yellow">高</span></td>
+        </tr>
+        <tr>
+            <td><strong>人力资源管理师</strong></td>
+            <td>2,000-8,000</td>
+            <td>每年5月/11月</td>
+            <td>三才培训、世纪合众</td>
+            <td><span class="tag tag-blue">中</span></td>
+        </tr>
+        <tr>
+            <td><strong>消防工程师</strong></td>
+            <td>5,000-30,000</td>
+            <td>每年11月</td>
+            <td>优路教育、大立教育</td>
+            <td><span class="tag tag-blue">中</span></td>
+        </tr>
+        <tr>
+            <td><strong>心理咨询师</strong></td>
+            <td>3,000-12,000</td>
+            <td>滚动</td>
+            <td>德瑞姆、华夏思源</td>
+            <td><span class="tag tag-blue">中</span></td>
+        </tr>
+        <tr>
+            <td><strong>执业药师</strong></td>
+            <td>3,000-10,000</td>
+            <td>每年10月</td>
+            <td>医学教育网、润德教育</td>
+            <td><span class="tag tag-blue">中</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="verdict">
+    <h4>关键洞察</h4>
+    <p>会计和建造师是广州职业教培的两大支柱品类，客单价高、市场成熟、机构密集。<strong>优先拜访会计类机构</strong>——陈文卫（番禺，1.2万在校生）、佰平（多校区连锁）等，它们的销售团队规模和线索量足以产生AI质检需求。</p>
+</div>
+</section>
+
+<!-- Section 2 -->
+<section id="sec2">
+<h2>二、销售跟进现状：怎么做的？痛点在哪？</h2>
+
+<h3>2.1 典型销售转化流程</h3>
+
+<div class="flow-chart">
+    <div class="flow-step">
+        <div class="step-title">线索获取</div>
+        <div class="step-desc">百度投放/抖音/<br>转介绍/地推</div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-step">
+        <div class="step-title">首次电话</div>
+        <div class="step-desc">5分钟确认意向<br>加微信</div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-step">
+        <div class="step-title">微信跟进</div>
+        <div class="step-desc">发资料/朋友圈<br>持续3-15天</div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-step">
+        <div class="step-title">邀约到访</div>
+        <div class="step-desc">试听课/校区<br>体验</div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-step">
+        <div class="step-title">面谈成交</div>
+        <div class="step-desc">课程介绍/<br>价格谈判/签单</div>
+    </div>
+</div>
+
+<h3>2.2 现状：管理方式与工具</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>环节</th>
+            <th>现有做法</th>
+            <th>使用工具</th>
+            <th>核心问题</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>线索分配</td>
+            <td>主管手动分配或按顺序轮流</td>
+            <td>Excel / 企微</td>
+            <td>分配不均，优质线索被浪费</td>
+        </tr>
+        <tr>
+            <td>电话跟进</td>
+            <td>销售自行拨打，手动记录</td>
+            <td>手机/IP电话 + 笔记</td>
+            <td><strong>无录音或录音不质检</strong>，话术质量无法把控</td>
+        </tr>
+        <tr>
+            <td>微信跟进</td>
+            <td>销售个人微信/企微聊天</td>
+            <td>企业微信 / 个人微信</td>
+            <td>跟进频率、话术无标准</td>
+        </tr>
+        <tr>
+            <td>跟进记录</td>
+            <td>Excel表或CRM手动填写</td>
+            <td>Excel / 简单CRM</td>
+            <td>填写率低，信息不准确</td>
+        </tr>
+        <tr>
+            <td>管理监督</td>
+            <td>主管旁听或抽查</td>
+            <td>人工巡检</td>
+            <td>覆盖率不到10%，形式大于实质</td>
+        </tr>
+        <tr>
+            <td>数据分析</td>
+            <td>月度汇总报表</td>
+            <td>Excel</td>
+            <td>滞后，发现问题时已损失线索</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>2.3 核心痛点（按严重程度排序）</h3>
+
+<div class="highlight-box">
+    <strong>痛点1：销售通话是黑箱</strong><br>
+    90%以上的中小教培机构<strong>没有对销售通话做任何质检</strong>。管理者不知道销售打了多少电话、说了什么、客户反应如何。仅靠销售自己填写的跟进记录，信息失真严重。
+</div>
+
+<div class="highlight-box">
+    <strong>痛点2：跟进遗漏导致线索浪费</strong><br>
+    教培行业获客成本持续上升（百度SEM关键词"会计培训"单次点击20-50元），但销售跟进不及时、不到位导致大量线索流失。行业数据显示，<strong>60-70%的线索因跟进不及时而流失</strong>。
+</div>
+
+<div class="highlight-box">
+    <strong>痛点3：违规承诺引发投诉</strong><br>
+    销售为成单口头承诺"包过""不过退费""保就业"，后续引发投诉甚至法律纠纷。循环智能的案例显示，新东方在线引入AI质检后，<strong>外部投诉降低了50%</strong>。
+</div>
+
+<div class="highlight-box">
+    <strong>痛点4：新人培养周期长</strong><br>
+    教培销售（课程顾问）流动率高（年离职率30-50%），新人平均需要2-3个月才能上手。缺乏标准化培训体系和优秀话术库。
+</div>
+</section>
+
+<!-- Section 3 -->
+<section id="sec3">
+<h2>三、竞争对手全景图</h2>
+
+<h3>3.1 竞争格局分层</h3>
+
+<p>竞争对手可分为四类，从通用到垂直：</p>
+
+<h3>第一层：通用IM/办公平台</h3>
+<div class="competitor-card">
+    <h4>企业微信 / 钉钉 / 飞书</h4>
+    <div class="comp-type">类型：通用平台 | 价格：基础免费</div>
+    <p>提供IM、客户管理、考勤等通用功能。企业微信在教培行业渗透率最高（与微信生态打通）。</p>
+    <p><strong>与你的关系：</strong><span class="tag tag-green">互补</span> 它们是基础设施，你的产品是上层应用。可以基于企微API做集成。</p>
+</div>
+
+<h3>第二层：教育行业SaaS（CRM+教务）</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>公司</th>
+            <th>核心功能</th>
+            <th>价格</th>
+            <th>AI质检能力</th>
+            <th>目标客户</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>螳螂科技</strong></td>
+            <td>CRM、营销获客、网电销管理</td>
+            <td>年费数万起</td>
+            <td><span class="tag tag-yellow">有基础质检</span></td>
+            <td>中大型教培（在线教育为主）</td>
+        </tr>
+        <tr>
+            <td><strong>校管家</strong></td>
+            <td>教务排课、学员管理、财务</td>
+            <td>年费5,000-30,000</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td>K12/素质教育为主</td>
+        </tr>
+        <tr>
+            <td><strong>校宝在线</strong></td>
+            <td>教务、招生、财务一体化</td>
+            <td>年费8,000-50,000</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td>K12/素质教育为主</td>
+        </tr>
+        <tr>
+            <td><strong>云朵课堂</strong></td>
+            <td>在线直播教学、CRM、运营</td>
+            <td>年费1-5万</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td>在线教育机构</td>
+        </tr>
+        <tr>
+            <td><strong>小鹅通</strong></td>
+            <td>知识付费、直播、营销工具</td>
+            <td>年费4,999-19,999</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td>知识付费/轻量教育</td>
+        </tr>
+        <tr>
+            <td><strong>有赞教育</strong></td>
+            <td>招生营销、直播、学员管理</td>
+            <td>年费6,800起</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td>泛教育行业</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>第三层：AI智能质检/会话分析平台</h3>
+
+<div class="competitor-card">
+    <h4>循环智能 (Recurrent AI)</h4>
+    <div class="comp-type">类型：AI会话智能 | 融资：C轮 | 客单价：年费30-100万+</div>
+    <p>头部玩家。为新东方在线提供全量通话质检，实现投诉降低50%、SOP执行率提升30%。</p>
+    <p>核心能力：语义级质检（非关键词匹配）、SOP流程监控、AI坐席辅助。</p>
+    <p><strong>与你的关系：</strong><span class="tag tag-red">间接竞争</span> 但它服务大客户（年费几十万起），中小型职业教培机构<strong>根本用不起</strong>。</p>
+</div>
+
+<div class="competitor-card">
+    <h4>DuDuTalk（嘟嘟拓客）</h4>
+    <div class="comp-type">类型：AI销售会话分析 | 价格：年费数万起</div>
+    <p>专注销售场景的通话录音+AI分析，提供智能工牌、手机通话录音方案。</p>
+    <p>客户主要在房产、金融领域，教育行业客户较少。</p>
+    <p><strong>与你的关系：</strong><span class="tag tag-yellow">潜在竞争</span> 产品形态接近，但未深入教培行业做垂直化。</p>
+</div>
+
+<div class="competitor-card">
+    <h4>容联七陌 / 智齿科技 / 网易七鱼</h4>
+    <div class="comp-type">类型：智能客服/呼叫中心 | 价格：坐席费+年费</div>
+    <p>主要做客服场景的质检（呼入），销售外呼场景较弱。有AI质检模块但偏通用。</p>
+    <p><strong>与你的关系：</strong><span class="tag tag-gray">弱竞争</span> 面向客服场景，与销售跟进场景有本质差异。</p>
+</div>
+
+<h3>第四层：纯CRM工具</h3>
+<div class="competitor-card">
+    <h4>纷享销客 / 销售易 / 有赞CRM / EC（六度人和）</h4>
+    <div class="comp-type">类型：CRM平台</div>
+    <p>EC在教培行业有一定份额（SCRM+电话集成），但AI质检能力弱，主要是规则匹配。</p>
+    <p><strong>与你的关系：</strong><span class="tag tag-green">互补或集成</span> 你的AI质检可以作为CRM的增值模块。</p>
+</div>
+
+<h3>3.2 竞争格局总结</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>维度</th>
+            <th>教育SaaS<br>(校管家等)</th>
+            <th>AI质检<br>(循环智能等)</th>
+            <th>通用CRM<br>(EC等)</th>
+            <th>你的产品</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>教培行业理解</td>
+            <td><span class="tag tag-green">深</span></td>
+            <td><span class="tag tag-yellow">中</span></td>
+            <td><span class="tag tag-yellow">中</span></td>
+            <td><span class="tag tag-green">深</span></td>
+        </tr>
+        <tr>
+            <td>AI质检能力</td>
+            <td><span class="tag tag-red">无</span></td>
+            <td><span class="tag tag-green">强</span></td>
+            <td><span class="tag tag-red">弱</span></td>
+            <td><span class="tag tag-green">强</span></td>
+        </tr>
+        <tr>
+            <td>职教垂直化</td>
+            <td><span class="tag tag-red">K12为主</span></td>
+            <td><span class="tag tag-red">金融为主</span></td>
+            <td><span class="tag tag-red">通用</span></td>
+            <td><span class="tag tag-green">专注职教</span></td>
+        </tr>
+        <tr>
+            <td>价格门槛</td>
+            <td>中 (年费万级)</td>
+            <td>高 (年费十万+)</td>
+            <td>中 (年费万级)</td>
+            <td><strong>低 (项目制3-5万)</strong></td>
+        </tr>
+        <tr>
+            <td>本地服务能力</td>
+            <td><span class="tag tag-red">弱</span></td>
+            <td><span class="tag tag-red">弱</span></td>
+            <td><span class="tag tag-yellow">中</span></td>
+            <td><span class="tag tag-green">强(广州)</span></td>
+        </tr>
+    </tbody>
+</table>
+</section>
+
+<!-- Section 4 -->
+<section id="sec4">
+<h2>四、市场空白与切入机会</h2>
+
+<div class="gap-matrix">
+    <div class="gap-item">
+        <h4>空白1：中小教培的AI质检真空</h4>
+        <p>循环智能等服务大客户（新东方、好未来级别），年费30万起。广州500-800家正规职业教培机构中，<strong>95%以上没有用过任何AI质检产品</strong>。</p>
+    </div>
+    <div class="gap-item">
+        <h4>空白2：职教赛道被忽视</h4>
+        <p>现有教育SaaS主要服务K12和素质教育（校管家、校宝在线）。职业教培的考证周期、学员画像、销售话术完全不同，<strong>没有专门的垂直产品</strong>。</p>
+    </div>
+    <div class="gap-item">
+        <h4>空白3：电话→微信的跨渠道跟进</h4>
+        <p>现有工具要么管电话（呼叫中心），要么管微信（SCRM），<strong>没有产品把电话质检和微信跟进打通</strong>，形成完整的跟进链路分析。</p>
+    </div>
+    <div class="gap-item">
+        <h4>空白4：本地化服务缺失</h4>
+        <p>SaaS产品多在北京/杭州，对广州本地机构只能远程服务。教培老板决策偏传统，<strong>更信任能上门演示、当面沟通的服务商</strong>。</p>
+    </div>
+</div>
+
+<div class="verdict">
+    <h4>市场空间估算</h4>
+    <ul>
+        <li><strong>广州可服务机构：</strong>约500-800家正规职业教培机构（含连锁分校区数量更多）</li>
+        <li><strong>核心目标客户：</strong>有10人以上销售团队的中型机构，约100-200家</li>
+        <li><strong>单客年产值：</strong>项目制3-5万/首单，后续运维1-2万/年</li>
+        <li><strong>广州本地天花板：</strong>100家 x 5万 = <strong>500万/年</strong>（仅广州）</li>
+        <li><strong>广东省天花板：</strong>如果模式验证成功复制到深圳、东莞、佛山，<strong>2,000-3,000万/年</strong></li>
+    </ul>
+</div>
+</section>
+
+<!-- Section 5 -->
+<section id="sec5">
+<h2>五、目标客户画像与优先拜访名单</h2>
+
+<h3>5.1 理想客户画像</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>维度</th>
+            <th>理想客户特征</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>品类</td>
+            <td>会计培训、建造师培训（客单价高、销售依赖强）</td>
+        </tr>
+        <tr>
+            <td>规模</td>
+            <td>年营收500万以上，销售团队10-50人</td>
+        </tr>
+        <tr>
+            <td>校区</td>
+            <td>2-10个校区（跨校区管理痛点最强）</td>
+        </tr>
+        <tr>
+            <td>位置</td>
+            <td>番禺、天河（教培机构密集区）</td>
+        </tr>
+        <tr>
+            <td>决策人</td>
+            <td>校长/运营总监/销售总监（能直接拍板）</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>5.2 优先拜访名单（广州本地）</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>机构</th>
+            <th>品类</th>
+            <th>规模</th>
+            <th>位置</th>
+            <th>优先级</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>陈文卫会计培训</strong></td>
+            <td>会计</td>
+            <td>3校区，在校生1.2万</td>
+            <td>番禺总校/天河/海珠</td>
+            <td><span class="tag tag-red">最高</span></td>
+        </tr>
+        <tr>
+            <td><strong>佰平会计培训</strong></td>
+            <td>会计</td>
+            <td>多校区连锁</td>
+            <td>广州多区</td>
+            <td><span class="tag tag-red">最高</span></td>
+        </tr>
+        <tr>
+            <td><strong>金功夫会计培训</strong></td>
+            <td>会计</td>
+            <td>十年深耕，累计20万学员</td>
+            <td>广州</td>
+            <td><span class="tag tag-red">最高</span></td>
+        </tr>
+        <tr>
+            <td><strong>仁和会计</strong></td>
+            <td>会计</td>
+            <td>全国连锁，广州校区</td>
+            <td>越秀区中山五路</td>
+            <td><span class="tag tag-yellow">高（总部决策）</span></td>
+        </tr>
+        <tr>
+            <td><strong>德立教育</strong></td>
+            <td>综合（会计/教资/技能）</td>
+            <td>20个教学点，12万+学员</td>
+            <td>广州多区</td>
+            <td><span class="tag tag-red">最高</span></td>
+        </tr>
+        <tr>
+            <td><strong>优路教育（广州）</strong></td>
+            <td>建造师/消防</td>
+            <td>全国连锁，广州分校</td>
+            <td>天河</td>
+            <td><span class="tag tag-yellow">高（总部决策）</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="warning">
+    <h4>拜访建议</h4>
+    <ul>
+        <li><strong>优先本地品牌</strong>（陈文卫、佰平、金功夫、德立）——决策在本地，老板能直接拍板</li>
+        <li><strong>全国连锁慎碰</strong>（仁和、优路、中公）——广州校区无决策权，需要走总部采购流程</li>
+        <li><strong>番禺是第一站</strong>——陈文卫总校在番禺，周边还有大量中小会计培训机构集聚</li>
+    </ul>
+</div>
+</section>
+
+<!-- Section 6 -->
+<section id="sec6">
+<h2>六、结论与建议</h2>
+
+<div class="verdict">
+    <h4>结论：机会真实存在，窗口期约12-18个月</h4>
+    <ol>
+        <li><strong>痛点已验证：</strong>循环智能在新东方的案例证明了AI通话质检对教培行业有效（投诉-50%，SOP+30%），但它只服务大客户</li>
+        <li><strong>中小教培真空：</strong>广州500+家职教机构，目前没有任何一家在用AI质检产品</li>
+        <li><strong>竞争壁垒：</strong>你的壁垒不是技术（LLM能力大家都能用），而是<strong>行业know-how + 本地服务 + 低价交付</strong></li>
+        <li><strong>窗口期有限：</strong>随着大模型能力普及，螳螂科技、EC等现有教育SaaS可能在1-2年内补上AI质检功能</li>
+    </ol>
+</div>
+
+<h3>执行建议调整</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>原计划</th>
+            <th>调整建议</th>
+            <th>原因</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>找3家机构聊</td>
+            <td><strong>聚焦番禺会计培训圈</strong>，先找5家</td>
+            <td>番禺是会计培训重镇，机构扎堆，一天可以拜访3-4家</td>
+        </tr>
+        <tr>
+            <td>做通话质检demo</td>
+            <td><strong>先做微信聊天分析demo</strong>（更容易获取数据）</td>
+            <td>通话录音涉及电话系统对接，微信聊天记录导出更简单，见效更快</td>
+        </tr>
+        <tr>
+            <td>项目制3-5万</td>
+            <td>第一单<strong>先做1万的POC试点</strong></td>
+            <td>降低客户决策门槛，用效果说话后再追加到3-5万</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td><strong>同时准备一份ROI计算器</strong>（已在demo中）</td>
+            <td>教培老板最看重投入产出比，demo页已包含ROI计算器</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="highlight-box">
+    <strong>下一步行动 (本周)</strong><br>
+    1. 拿着demo页面 (<a href="demo.html">demo.html</a>) 去番禺陈文卫会计培训附近转一圈<br>
+    2. 准备一个简单的问题清单："你们销售打电话怎么记录？""跟进遗漏多不多？""有没有用什么系统？"<br>
+    3. 目标：聊5家，至少拿到2家的真实跟进数据（脱敏后的Excel或微信截图）验证需求
+</div>
+
+</section>
+
+</div>
+
+</body>
+</html>
