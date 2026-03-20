@@ -1,0 +1,60 @@
+name: Manual Dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+      message:
+        description: 'Dispatch message or notes'
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display dispatch info
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Message: ${{ inputs.message }}"
+          echo "Branch: ${{ github.ref_name }}"
+
+      - name: Validate HTML
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html found"
+          else
+            echo "index.html not found" && exit 1
+          fi
+
+      - name: Deploy to GitHub Pages
+        if: inputs.environment == 'production'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  pages-deploy:
+    if: inputs.environment == 'production'
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
