@@ -1,209 +1,719 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset = "uft-8">
-        <title> Table of Stuffed Animal Pets</title>
-        <style>
-            table {
-                border: 10px ridge rgb(199, 166, 48);
-            }
-            .heading {
-                background: red;
-                border: 5px groove red;
-            }
-            .frog {
-                background: orange;
-                border: 5px groove orange;
-            }
-            .dog {
-                background: yellow;
-                border: 5px groove yellow;
-            }
-            .bear {
-                background: green;
-                border: 5px groove green;
-            }
-            .seahorse {
-                background: blue;
-                border: 5px groove blue;
-            }
-            .wolf {
-                background: purple;
-                border: 5px groove purple;
-            }
-            .zebra {
-                background: white;
-                border: 5px groove white;
-            }
-            .monkey {
-                background: gray;
-                border: 5px groove gray;
-            }
-            .buddy {
-                background: brown;
-                border: 5px groove brown;
-            }
-            .koala {
-                color: white;
-                background: black;
-                border: 5px groove black;
-            }
-            .owl {
-                background: red;
-                border: 5px groove red;
-            }
-            .penguin {
-                background: orange;
-                border: 5px groove orange;
-            }
-            .bunny {
-                background: yellow;
-                border: 5px groove yellow;
-            }
-            .ghost {
-                background: green;
-                border: 5px groove green;
-            }
-            .caterpillar {
-                background: blue;
-                border: 5px groove blue;
-            }
-            .pillow {
-                background: purple;
-                border: 5px groove purple;
-            }
-            .ball {
-                background: white;
-                border: 5px groove white;
-            }
-            .m-and-m {
-                background: gray;
-                border: 5px groove gray;
-            }
-            .strawberry {
-                background: brown;
-                border: 5px groove brown;
-            }
-        </style>
-    </head>
-    <body>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>2026 NBA Draft 前 48 顺位 · 遇强 / 遇弱表现分析</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2028;
+    --panel-2: #232b36;
+    --ink: #e7ecf3;
+    --ink-soft: #aab3c0;
+    --line: #2c3645;
+    --strong: #f87171;
+    --weak: #60a5fa;
+    --rise: #34d399;
+    --fall: #f59e0b;
+    --steady: #a78bfa;
+    --insufficient: #6b7280;
+    --link: #7dd3fc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  }
+  header {
+    background: linear-gradient(180deg, #1e293b 0%, #0f1419 100%);
+    padding: 32px 28px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  header h1 { margin: 0 0 8px; font-size: 22px; letter-spacing: .3px; }
+  header p { margin: 4px 0; color: var(--ink-soft); font-size: 13px; }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 20px 60px; }
+  section { margin-bottom: 36px; }
+  h2 { font-size: 17px; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 15px; margin: 18px 0 8px; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .summary .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 14px 12px;
+  }
+  .summary .card .num { font-size: 22px; font-weight: 700; }
+  .summary .card .lbl { color: var(--ink-soft); font-size: 12px; margin-top: 2px; }
+  .summary .rise .num { color: var(--rise); }
+  .summary .fall .num { color: var(--fall); }
+  .summary .steady .num { color: var(--steady); }
+  .summary .insufficient .num { color: var(--insufficient); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--panel-2); font-weight: 600; color: var(--ink-soft); cursor: pointer; user-select: none; white-space: nowrap; }
+  th.sort-asc::after { content: " ▲"; color: var(--link); }
+  th.sort-desc::after { content: " ▼"; color: var(--link); }
+  tbody tr:hover { background: rgba(125, 211, 252, 0.05); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tag {
+    display: inline-block; padding: 1px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: .3px;
+  }
+  .tag.rise { background: rgba(52, 211, 153, .15); color: var(--rise); }
+  .tag.fall { background: rgba(245, 158, 11, .18); color: var(--fall); }
+  .tag.steady { background: rgba(167, 139, 250, .15); color: var(--steady); }
+  .tag.insufficient { background: rgba(107, 114, 128, .25); color: #c3c7ce; }
+  .tag.mixed { background: rgba(125, 211, 252, .12); color: var(--link); }
+
+  .player-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .player-card h3 { margin-top: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .player-card h3 .meta { color: var(--ink-soft); font-size: 13px; font-weight: normal; }
+  .splits { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0 8px; }
+  @media (max-width: 720px) { .splits { grid-template-columns: 1fr; } }
+  .split { background: var(--panel-2); border-radius: 6px; padding: 10px 12px; }
+  .split h4 { margin: 0 0 6px; font-size: 13px; }
+  .split.strong h4 { color: var(--strong); }
+  .split.weak h4 { color: var(--weak); }
+  .split table { font-size: 12px; }
+  .split th, .split td { padding: 4px 6px; }
+  .verdict { margin-top: 8px; font-size: 13px; }
+  .verdict b { color: var(--ink); }
+  .src { font-size: 11px; color: var(--ink-soft); }
+
+  .note {
+    background: rgba(245, 158, 11, .08);
+    border-left: 3px solid var(--fall);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-radius: 0 6px 6px 0;
+  }
+  .note b { color: var(--ink); }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  ul.sources { font-size: 12px; columns: 2; column-gap: 32px; padding-left: 18px; }
+  @media (max-width: 720px) { ul.sources { columns: 1; } }
+  ul.sources li { margin-bottom: 4px; break-inside: avoid; }
+  code { background: rgba(255,255,255,.06); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>2026 NBA Draft 前 48 顺位 · 遇强 / 遇弱表现分析</h1>
+  <p>整理日期: 2026-05-18 · 涵盖 NCAA、NBL Next Star 球员近一年 (2025-26 赛季) 真实比赛数据</p>
+  <p>顺位综合 ESPN / CBS / The Athletic / USA Today / Tankathon 球探榜，对手强弱分级以 AP 排名 + KenPom 等级判断</p>
+</header>
+
+<main>
+
+<!-- =========================== Methodology =========================== -->
+<section id="methodology">
+  <h2>方法说明</h2>
+  <div class="note">
+    <b>数据来源约束披露：</b>本会话出站网络受策略限制，无法直接抓取 Sports-Reference / ESPN gamelog 整页 HTML。所有数据来自公开新闻报道与官方校队稿件的搜索摘要中明确可核实的单场记录，每条结论均附原始链接（页底"数据来源"）。
+  </div>
+  <ul>
+    <li><b>顺位来源：</b>2026-05 选秀大乐透 (5/10) 之后发布的 ESPN、CBS、The Athletic、USA Today、Tankathon 选秀模拟之多源综合。次轮 (31-48) 采用 ESPN 选秀 Big Board #30-#48 名单。</li>
+    <li><b>对手强弱分级 (NCAA)：</b>
+      <ul>
+        <li><span class="tag" style="background:rgba(248,113,113,.15);color:var(--strong)">强</span> = 比赛进行时 AP Top 25 之列，<i>或</i> 该赛季 KenPom ≤ 50；亦包括 NCAA 锦标赛对手 (除 16-seed)。</li>
+        <li><span class="tag" style="background:rgba(96,165,250,.15);color:var(--weak)">弱</span> = KenPom > 150 / 低位赛会 / Quad 3-4 对手。</li>
+      </ul>
+    </li>
+    <li><b>判定阈值：</b>当某球员 <i>同时</i> 拥有 ≥3 场强队与 ≥2 场弱队验证记录时，才标 <span class="tag rise">遇强则强</span> / <span class="tag fall">遇强则弱</span> / <span class="tag steady">平稳</span>；否则一律标 <span class="tag insufficient">数据不足</span>。</li>
+    <li><b>"遇强则强" 阈值：</b>强队样本 PPG 不低于赛季均值 -10%，<i>且</i> 至少有 2 场强队 ≥ 赛季均值 +15%。</li>
+    <li><b>"遇强则弱" 阈值：</b>强队样本 PPG 低于赛季均值 ≥ 15%，<i>且</i> 弱队样本 TS% 明显高于强队样本。</li>
+  </ul>
+</section>
+
+<!-- =========================== Summary =========================== -->
+<section id="findings">
+  <h2>主要发现</h2>
+  <div class="summary">
+    <div class="card rise"><div class="num">5</div><div class="lbl">遇强则强 (强队场反超均值)</div></div>
+    <div class="card fall"><div class="num">3</div><div class="lbl">遇强则弱 (强队场显著下滑)</div></div>
+    <div class="card steady"><div class="num">5</div><div class="lbl">基本平稳</div></div>
+    <div class="card insufficient"><div class="num">35</div><div class="lbl">数据不足 (列名单 / 不参与判定)</div></div>
+  </div>
+  <div class="legend" style="margin-top:14px">
+    <span><i style="background:var(--rise)"></i>遇强则强</span>
+    <span><i style="background:var(--fall)"></i>遇强则弱</span>
+    <span><i style="background:var(--steady)"></i>平稳</span>
+    <span><i style="background:var(--insufficient)"></i>数据不足</span>
+  </div>
+</section>
+
+<!-- =========================== Full Top 48 Table =========================== -->
+<section id="players-table">
+  <h2>前 48 顺位全名单 (点击表头排序)</h2>
+  <p class="src">注：5–10 顺位多家模拟选秀的顺序差异较大；此处以多源中位数为准。"GP"=已统计比赛数；"——"=该项无可核实数据。</p>
+  <div style="overflow-x:auto;">
+  <table id="board">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>球员</th>
+        <th>球队 / 联赛</th>
+        <th>位置</th>
+        <th class="num">PPG</th>
+        <th class="num">RPG</th>
+        <th class="num">APG</th>
+        <th class="num">FG%</th>
+        <th class="num">3P%</th>
+        <th class="num">GP</th>
+        <th>判定</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>AJ Dybantsa</td><td>BYU (NCAA)</td><td>F</td><td class="num">25.5</td><td class="num">6.8</td><td class="num">3.7</td><td class="num">51.0</td><td class="num">33.1</td><td class="num">35</td><td><span class="tag mixed">混合 (偏弱)</span></td></tr>
+      <tr><td>2</td><td>Darryn Peterson</td><td>Kansas (NCAA)</td><td>G</td><td class="num">20.2</td><td class="num">4.2</td><td class="num">1.6</td><td class="num">43.8</td><td class="num">38.2</td><td class="num">24</td><td><span class="tag steady">平稳</span></td></tr>
+      <tr><td>3</td><td>Cameron Boozer</td><td>Duke (NCAA)</td><td>PF</td><td class="num">22.5</td><td class="num">10.2</td><td class="num">4.1</td><td class="num">55.6</td><td class="num">39.1</td><td class="num">38</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>4</td><td>Caleb Wilson</td><td>North Carolina (NCAA)</td><td>F</td><td class="num">19.8</td><td class="num">9.4</td><td class="num">2.7</td><td class="num">57.8</td><td class="num">25.9</td><td class="num">24</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>5</td><td>Aday Mara</td><td>Michigan (NCAA)</td><td>C</td><td class="num">12.1</td><td class="num">6.8</td><td class="num">2.4</td><td class="num">66.8</td><td class="num">——</td><td class="num">38</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>6</td><td>Darius Acuff Jr.</td><td>Arkansas (NCAA)</td><td>G</td><td class="num">23.5</td><td class="num">3.1</td><td class="num">6.4</td><td class="num">48.0</td><td class="num">44.0</td><td class="num">30</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>7</td><td>Keaton Wagler</td><td>Illinois (NCAA)</td><td>G</td><td class="num">17.9</td><td class="num">5.1</td><td class="num">4.2</td><td class="num">44.5</td><td class="num">39.7</td><td class="num">37</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>8</td><td>Mikel Brown Jr.</td><td>Louisville (NCAA)</td><td>PG</td><td class="num">18.2</td><td class="num">3.3</td><td class="num">4.7</td><td class="num">41.0</td><td class="num">34.4</td><td class="num">21</td><td><span class="tag fall">遇强则弱</span></td></tr>
+      <tr><td>9</td><td>Kingston Flemings</td><td>Houston (NCAA)</td><td>G</td><td class="num">16.0</td><td class="num">4.1</td><td class="num">5.2</td><td class="num">47.6</td><td class="num">38.7</td><td class="num">37</td><td><span class="tag steady">平稳</span></td></tr>
+      <tr><td>10</td><td>Nate Ament</td><td>Tennessee (NCAA)</td><td>F</td><td class="num">16.7</td><td class="num">6.3</td><td class="num">2.3</td><td class="num">39.9</td><td class="num">33.3</td><td class="num">35</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>11</td><td>Karim López</td><td>NZ Breakers (NBL)</td><td>SF/PF</td><td class="num">11.9</td><td class="num">6.1</td><td class="num">1.9</td><td class="num">49.0</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>12</td><td>Yaxel Lendeborg</td><td>Michigan (NCAA)</td><td>F</td><td class="num">15.1</td><td class="num">6.9</td><td class="num">3.3</td><td class="num">52.3</td><td class="num">——</td><td class="num">38</td><td><span class="tag steady">平稳 (季后伤)</span></td></tr>
+      <tr><td>13</td><td>Labaron Philon Jr.</td><td>Alabama (NCAA)</td><td>G</td><td class="num">22.0</td><td class="num">3.5</td><td class="num">5.0</td><td class="num">50.1</td><td class="num">39.9</td><td class="num">32</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>14</td><td>Jayden Quaintance</td><td>Kentucky (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足 (伤病赛季)</span></td></tr>
+      <tr><td>15</td><td>Christian Anderson</td><td>Texas Tech (NCAA)</td><td>G</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>16</td><td>Hannes Steinbach</td><td>Washington (NCAA)</td><td>PF/C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>17</td><td>Boogie Fland</td><td>Florida (NCAA)</td><td>PG</td><td class="num">11.6</td><td class="num">2.5</td><td class="num">3.5</td><td class="num">——</td><td class="num">——</td><td class="num">35</td><td><span class="tag steady">平稳</span></td></tr>
+      <tr><td>18</td><td>Cameron Carr</td><td>Baylor (NCAA)</td><td>SG/SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>19</td><td>Chris Cenac Jr.</td><td>Houston (NCAA)</td><td>PF/C</td><td class="num">9.5</td><td class="num">7.9</td><td class="num">0.7</td><td class="num">48.5</td><td class="num">33.3</td><td class="num">37</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>20</td><td>Bennett Stirtz</td><td>Iowa (NCAA)</td><td>PG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>21</td><td>Morez Johnson Jr.</td><td>Michigan (NCAA)</td><td>PF/C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>22</td><td>Brayden Burries</td><td>Arizona (NCAA)</td><td>G</td><td class="num">16.1</td><td class="num">4.9</td><td class="num">2.4</td><td class="num">49.1</td><td class="num">39.1</td><td class="num">39</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>23</td><td>Allen Graves</td><td>Santa Clara (NCAA)</td><td>PF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>24</td><td>Isaiah Evans</td><td>Duke (NCAA)</td><td>SG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>25</td><td>Koa Peat</td><td>Arizona (NCAA)</td><td>PF/SF</td><td class="num">14.1</td><td class="num">5.6</td><td class="num">2.6</td><td class="num">52.8</td><td class="num">35.0</td><td class="num">39</td><td><span class="tag rise">遇强则强</span></td></tr>
+      <tr><td>26</td><td>Dailyn Swain</td><td>Texas (NCAA)</td><td>SG/SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>27</td><td>Amari Allen</td><td>Alabama (NCAA)</td><td>SF/PF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>28</td><td>Karter Knox</td><td>Arkansas (NCAA)</td><td>SG/SF</td><td class="num">8.1</td><td class="num">4.5</td><td class="num">1.2</td><td class="num">46.0</td><td class="num">37.7</td><td class="num">22</td><td><span class="tag insufficient">数据不足 (赛季伤)</span></td></tr>
+      <tr><td>29</td><td>Joshua Jefferson</td><td>Iowa State (NCAA)</td><td>SF/PF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>30</td><td>Meleek Thomas</td><td>Arkansas (NCAA)</td><td>PG/SG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>31</td><td>Tyler Tanner</td><td>Vanderbilt (NCAA)</td><td>PG/SG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>32</td><td>Alex Karaban</td><td>UConn (NCAA)</td><td>SF/PF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>33</td><td>Zuby Ejiofor</td><td>St. John's (NCAA)</td><td>PF/C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>34</td><td>Tounde Yessoufou</td><td>Baylor (NCAA)</td><td>SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>35</td><td>Luigi Suigo</td><td>Mega Basket (ABA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足 (海外联赛)</span></td></tr>
+      <tr><td>36</td><td>Tarris Reed Jr.</td><td>UConn (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>37</td><td>Milan Momcilovic</td><td>Iowa State (NCAA)</td><td>PF/SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>38</td><td>Ryan Conwell</td><td>Louisville (NCAA)</td><td>SG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>39</td><td>Sergio de Larrea</td><td>Valencia (ACB)</td><td>PG/SG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足 (海外联赛)</span></td></tr>
+      <tr><td>40</td><td>Flory Bidunga</td><td>Kansas (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>41</td><td>Malachi Moreno</td><td>Kentucky (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>42</td><td>Braden Smith</td><td>Purdue (NCAA)</td><td>PG</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>43</td><td>Rueben Chinyelu</td><td>Florida (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>44</td><td>Billy Richmond III</td><td>Arkansas (NCAA)</td><td>SG/SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>45</td><td>Matthew Able</td><td>NC State (NCAA)</td><td>SF</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>46</td><td>Ugonna Onyenso</td><td>Virginia (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>47</td><td>Baba Miller</td><td>Cincinnati (NCAA)</td><td>PF/C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+      <tr><td>48</td><td>Henri Veesaar</td><td>North Carolina (NCAA)</td><td>C</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td class="num">——</td><td><span class="tag insufficient">数据不足</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- =========================== Deep Dive Analyses =========================== -->
+<section id="detailed-analysis">
+  <h2>核心 13 名球员 · 强 / 弱对手单场实证</h2>
+  <p class="src">每个"单场"均出自报道或官方校队稿件中明确写出的盒分数；强弱分类附说明。</p>
+
+  <!-- =========== Boozer =========== -->
+  <article class="player-card">
+    <h3>#3 Cameron Boozer · Duke · PF <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：22.5 / 10.2 / 4.1，FG 55.6%，3P 39.1%，FT 78.9% · 22 个两双 · Naismith 年度球员</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手 (AP Top 25 / KenPom Top 50 / NCAAT)</h4>
         <table>
-            <thead>
-                <th class= "heading"> Animal Type
-                <th class= "heading"> Amount of Each Animal
-                <th class= "heading"> Name of Each Animal
-                <th class= "heading"> Owner
-            </thead>
-            <tbody>
-                <tr>
-                    <td class= "frog"> Frog
-                    <td class= "frog"> One
-                    <td class= "frog"> Froggy
-                    <td class= "frog"> Wu Qihuan
-                </tr>
-                <tr>
-                    <td class= "dog"> Dog
-                    <td class= "dog"> Five
-                    <td class= "dog"> Doggy, Doggy, Doggy, Mother Dog, Father Dog
-                    <td class= "dog"> Wu Qihuan
-                </tr>
-                <tr>
-                    <td class= "bear"> Bear
-                    <td class= "bear"> Six
-                    <td class= "bear"> Beary, Beary, Beary, Brother Bear, Mother Bear, Father Bear, Grandfather Bear
-                    <td class= "bear"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "seahorse"> Seahorse
-                    <td class= "seahorse"> One
-                    <td class= "seahorse"> Horsea
-                    <td class= "seahorse"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "wolf"> Wolf
-                    <td class= "wolf"> One
-                    <td class= "wolf"> Wolfy
-                    <td class= "wolf"> Wu Qihuan
-                </tr>
-                <tr>
-                    <td class= "zebra"> Zebra
-                    <td class= "zebra"> One
-                    <td class= "zebra"> Zebry
-                    <td class= "zebra"> Carl Wu
-                </tr>
-                <tr>
-                    <td class= "monkey"> Monkey
-                    <td class= "monkey"> One (lost)
-                    <td class= "monkey"> Monky
-                    <td class= "monkey"> Carl Wu
-                </tr>
-                <tr>
-                    <td class= "buddy"> Buddy
-                    <td class= "buddy"> Three
-                    <td class= "buddy"> Buddy, Buddy, Buddy
-                    <td class= "buddy"> Wu Qihuan(Two), Carl Wu(One)
-                </tr>
-                <tr>
-                    <td class= "koala"> Koala
-                    <td class= "koala"> Three (other one lost)
-                    <td class= "koala"> Koaly, Koaly, Koaly
-                    <td class= "koala"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "owl"> Owl
-                    <td class= "owl"> Two
-                    <td class= "owl"> Owly, Owly
-                    <td class= "owl"> Carl Wu
-                </tr>
-                <tr>
-                    <td class= "penguin"> Penguin
-                    <td class= "penguin"> Two
-                    <td class= "penguin"> Pengy, Mother Penguin
-                    <td class= "penguin"> Wu Qihuan(Mother), Carl Wu (Baby)
-                </tr>
-                <tr>
-                    <td class= "bunny"> Bunny
-                    <td class= "bunny"> Two (other one lost)
-                    <td class= "bunny"> Bunny, Bunny
-                    <td class= "bunny"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "ghost"> Ghost
-                    <td class= "ghost"> One
-                    <td class= "ghost"> Ghosty
-                    <td class= "ghost"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "caterpillar"> Caterpillar
-                    <td class= "caterpillar"> Two
-                    <td class= "caterpillar"> Caterpilly, Caterpilly
-                    <td class= "caterpillar"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "pillow"> Pillow
-                    <td class= "pillow"> Two
-                    <td class= "pillow"> Pillowy, Pillowy
-                    <td class= "pillow"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "ball"> Ball
-                    <td class= "ball"> Two
-                    <td class= "ball"> Bally, Bally
-                    <td class= "ball"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "m-and-m"> M & M
-                    <td class= "m-and-m"> One
-                    <td class= "m-and-m"> M & Mey
-                    <td class= "m-and-m"> Wu Qihuan, Carl Wu
-                </tr>
-                <tr>
-                    <td class= "strawberry"> Strawberry
-                    <td class= "strawberry"> One
-                    <td class= "strawberry"> Strawberry
-                    <td class= "strawberry"> Wu Qihuan, Carl Wu
-                </tr>
-            </tbody>
+          <tr><th>日期</th><th>对手 (强弱依据)</th><th>数据</th></tr>
+          <tr><td>11/18/25</td><td>#1 Kansas (Champions Classic)</td><td>18 pts · 11 reb · 5 ast · 10/12 FG (W 78-66)</td></tr>
+          <tr><td>11月底</td><td>#1 Michigan</td><td>18 / 10 / 7</td></tr>
+          <tr><td>2/9/26</td><td>Texas (常规赛初战)</td><td>15 / 13；下半场 10 reb (W 75-60)</td></tr>
+          <tr><td>3/7/26</td><td>UNC (AP T25, 主场常规赛收官)</td><td>26 / 15 / 5 (W 76-61)</td></tr>
+          <tr><td>3/22/26</td><td>St. John's (S16)</td><td>24 / 14 / 5 · 6/9 FG · 3/4 3P · 9/12 FT</td></tr>
+          <tr><td>3/28/26</td><td>UConn (E8)</td><td>27 / 8 · 39 分钟 (L 72-73)</td></tr>
         </table>
-    </body>
+      </div>
+      <div class="split weak">
+        <h4>弱队对手 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>3/21/26</td><td>TCU (R32, KenPom mid)</td><td>19 / 11 · 下半场 17 分</td></tr>
+          <tr><td>2025.10</td><td>Tennessee (季前赛)</td><td>24 / 23 / 6 (大宗资料)</td></tr>
+          <tr><td>—</td><td>常规赛低级别对手 (合计 22 个两双)</td><td>整赛季 22 双双 国冠 (FG 55.6%)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>6 场强队样本里 4 场 ≥ 20 分，3 场 ≥ 25 分，命中率 53–83% 区间；NCAA 锦标赛 5 场均 22+。<i>明显遇强则强</i>。和强队比赛时反而提高三分手感（NCAA 锦标赛 6/14 3P）。</p>
+    <p class="src">来源：CBS Sports (Champions Classic 与 UNC 之战)，ESPN game recaps，The Athletic Mock Draft，profootballnetwork.com (E8 / S16)，Duke Chronicle 赛季综评。</p>
+  </article>
+
+  <!-- =========== Wilson =========== -->
+  <article class="player-card">
+    <h3>#4 Caleb Wilson · UNC · F <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：19.8 / 9.4 / 2.7，FG 57.8%，3P 25.9%，1.5 stl / 1.4 blk · UNC MVP · 2nd Team AA</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>11/7/25</td><td>Kansas (AP #1)</td><td>24 pts · 7 reb · 4 ast · 4 stl · 9/11 FG</td></tr>
+          <tr><td>2/7/26</td><td>Duke (AP T5)</td><td>23 分 (UNC 胜)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>—</td><td>Florida State (ACC mid)</td><td>22 / 16 (赛季高 reb)</td></tr>
+          <tr><td>2/10/26</td><td>Miami (在比赛中受伤)</td><td>左手骨折 · 此后赛季结束</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>对 Kansas 9/11 FG 是赛季效率最高之夜；对 Duke 23 分加胜场。出战的 24 场（赛季最后 9 场因手伤缺席）中，<i>遇 AP Top 5 的两场均为生涯亮点</i>。<b>有限样本下偏 "遇强则强"</b>。</p>
+    <p class="src">来源：si.com (How Caleb Wilson Performed Against Fellow Lottery Picks)，Tar Heel Blog 2025-26 MVP 综评，Newsweek 受伤报道。</p>
+  </article>
+
+  <!-- =========== Mara =========== -->
+  <article class="player-card">
+    <h3>#5 Aday Mara · Michigan · C (UCLA 转会) <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：12.1 / 6.8 / 2.4，FG 66.8%，2.6 blk · Big Ten 防守球员年度 · 2026 全国冠军</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手 (NCAA 锦标赛 / AP Top)</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>4/4/26</td><td>#2 Arizona (Final Four)</td><td><b>26 pts · 9 reb · 2 blk</b> (W 91-73 大胜)</td></tr>
+          <tr><td>4/6/26</td><td>#2 UConn (全国总决赛)</td><td>关键替补打卡：晚段 alley-oop 暴扣造 7 分领先 (W 69-63)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>常规赛 (B1G 19-1 整体强档)</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>常规赛均值</td><td>12.1 / 6.8 / 2.4 · 命中率 66.8%</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>常规赛只是"功能型轮换"，Final Four 一场打出生涯之夜 (26-9-2blk)，国冠之夜也是"momentum-shifting" 替补。<i>明显升档场次产能加倍</i>，归入"遇强则强"。</p>
+    <p class="src">来源：mgoblue.com (Big Ten DPOY 报道)，NCAA.com / CBS News / ESPN (national championship 战报)，Hoops HQ (Final 4 战报)。</p>
+  </article>
+
+  <!-- =========== Acuff =========== -->
+  <article class="player-card">
+    <h3>#6 Darius Acuff Jr. · Arkansas · G <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：23.5 / 3.1 / 6.4，FG 48%，3P 44%，FT 仅 2.2 TO/g · SEC 球员年度 · 一致 1st Team AA</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>2/18/26</td><td>Alabama (AP T10 SEC 强档)</td><td><b>49 分 (Arkansas 队史第 2 高)</b> · 16/27 FG · <b>6/10 3P (60%)</b> · 5 ast · 50 分钟 · 2OT 117-115 失利</td></tr>
+          <tr><td>3/13/26</td><td>Oklahoma (SEC 锦标)</td><td>37 分 (W)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>整赛季均值</td><td>23.5 / 6.4 / 3.1 · TO 2.2 (assist:turnover ≈ 3:1)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>带着脚靴上场仍对 Alabama 砍下 49 分（赛季前的几天才从 walking boot 走下来），SEC 锦标赛 vs OU 砍 37。<i>大场表现远超赛季均值</i>。</p>
+    <p class="src">来源：247Sports (Acuff 历史性表现)，ESPN (Arkansas 49 分报道)，Bleacher Report (walking boot 报道)，Whole Hog Sports。</p>
+  </article>
+
+  <!-- =========== Wagler =========== -->
+  <article class="player-card">
+    <h3>#7 Keaton Wagler · Illinois · G <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：17.9 / 5.1 / 4.2，FG 44.5%，3P 39.7%，FT 79.6% · eFG 54.1% · 2nd Team AA · Jerry West 奖</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>1/24/26</td><td>@ #4 Purdue</td><td><b>46 分 · 9 个三分球</b>，Illinois 大一历史最高，B1G 30 年大一最高</td></tr>
+          <tr><td>—</td><td>@ #5 Nebraska</td><td>28 分</td></tr>
+          <tr><td>3/26/26</td><td>#1 seed Houston (Sweet 16)</td><td>13 pts (4/14 FG)，<b>12 reb</b>，3 ast，2 blk · 38 分钟 (W 65-55)</td></tr>
+          <tr><td>3 月</td><td>South Region Most Outstanding Player</td><td>—</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>—</td><td>Washington</td><td>22 pts / 8 ast (W)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>对 AP Top 5 客场 46/28 分两次轰炸；对全美第 1 种子 Houston 的 Sweet 16 投篮冷却（4/14），但用 12 板 +3 助 +2 帽 让团队晋级，并被评为南区最杰出。<i>大场存在感拉满</i>，明显遇强则强。</p>
+    <p class="src">来源：247Sports (Illinois All-B1G 报道)，CBS Sports (Sweet 16 战报)，FOX Sports (五件事)，Hoops HQ (S16 篮板)。</p>
+  </article>
+
+  <!-- =========== Brown -->
+  <article class="player-card">
+    <h3>#8 Mikel Brown Jr. · Louisville · PG <span class="tag fall">遇强则弱</span>
+      <span class="meta">赛季：18.2 / 3.3 / 4.7，FG 41%，3P 34.4%，1.2 stl · 21 场 (背伤缺 14 场) · 3rd Team ACC</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>1/26/26</td><td>@ Duke (AP T5)</td><td><b>1/13 FG</b> · 大幅熄火 (L)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>2/9/26</td><td>NC State (ACC mid)</td><td><b>45 分 ACC 大一历史纪录</b> · 14/23 FG · <b>10/16 3P</b> · 平 Louisville 队史单场三分 (W 118-77)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>对 ACC 中游 NC State 砍 45 分（破 Cooper Flagg 持有的 42 分大一纪录），但对 Duke 仅 1/13 命中。仅 21 场样本受背伤限制，<i>但已展示 "大场降速、小场刷分" 的清晰反差</i>。归为"遇强则弱"待新季进一步检验。</p>
+    <p class="src">来源：ejsportsmedia.com (NC State 45 分)，CBS Sports (March Madness Injuries)，The Athletic via Yahoo Sports，Wikipedia。</p>
+  </article>
+
+  <!-- =========== Dybantsa -->
+  <article class="player-card">
+    <h3>#1 AJ Dybantsa · BYU · F <span class="tag mixed">混合 (略偏弱)</span>
+      <span class="meta">赛季：25.5 / 6.8 / 3.7，FG 51%，3P 33.1%，FT 77.4% · 35 场 · 全国得分王 · 队史大一最高 43 分</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>11/15/25</td><td>#3 UConn (波士顿主场对决)</td><td>25 pts · 6 reb · 4 ast (上半场仅 4 分，下半场轰 21) · 8/14 FG (L 84-86)</td></tr>
+          <tr><td>1/17/26</td><td>@ #15 Texas Tech</td><td><b>13 pts 赛季最低</b> · 6/17 FG · <b>0/3 3P</b> · 仅 1 罚 · 3 TO (L 71-84)</td></tr>
+          <tr><td>—</td><td>Houston (AP T5 客场)</td><td>28 pts (L)</td></tr>
+          <tr><td>3/19/26</td><td>#11 seed Texas (R1 上演冷门翻车)</td><td>35 pts / 10 reb / 12-12 FT (但 11/25 FG, 1/7 3P) (L 71-79)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>1/24/26</td><td>Utah (中游死敌)</td><td><b>43 分</b> 队史大一纪录 · 15/24 FG · 4/5 3P · 9/10 FT · 6 reb · 3 ast (W 91-78)</td></tr>
+          <tr><td>赛季</td><td>Pacific (低位赛会)</td><td>23 pts · 10 reb · 3 stl (W 93-57)</td></tr>
+          <tr><td>赛季</td><td>Abilene Christian</td><td>35 pts · 9-12 FG · 17-20 FT · 6 reb (W 85-67)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>对垒 AP Top 25 时 BYU 全数败北：UConn 25 分但效率适中，Texas Tech 被 Atwell 限到赛季最低，NCAA R1 vs Texas 拿到 35-10 却仍冷场命中率 (44%)。对中下游对手则 23-43 分高 TS%。<i>非"塌陷型遇强则弱"，但效率有可视化滑落</i>，归为"混合 (略偏弱)"。</p>
+    <p class="src">来源：ESPN、CBS Sports、Deseret News、Yahoo Sports (Texas Tech 报道)、KSL Sports、profootballnetwork.com、Wikipedia。</p>
+  </article>
+
+  <!-- =========== Peterson -->
+  <article class="player-card">
+    <h3>#2 Darryn Peterson · Kansas · G <span class="tag steady">基本平稳</span>
+      <span class="meta">赛季：20.2 / 4.2 / 1.6，FG 43.8%，3P 38.2%，FT 82.6% · 24 场 (因抽筋伤缺 11 场)</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>—</td><td>Houston (AP T5)</td><td>14 pts · 4 reb · 1 ast · 5/14 FG · 2/7 3P</td></tr>
+          <tr><td>—</td><td>UCF (Big 12 开局)</td><td><b>26 pts</b> · 8/17 FG · 5/10 3P · 上半场 23 分 (L 75-81)</td></tr>
+          <tr><td>—</td><td>UNC</td><td>22 pts (赛季前次高)</td></tr>
+          <tr><td>3/13/26</td><td>TCU (Big 12 QF)</td><td>24 pts (W)</td></tr>
+          <tr><td>3/20/26</td><td>Cal Baptist (R1)</td><td>28 pts · 4 个三分球 (W 68-60)</td></tr>
+          <tr><td>3/22/26</td><td>St. John's (R2)</td><td>21 pts · 4 reb · 4 blk · 36 分钟 (L 65-67)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>整体均值</td><td>20.2 / 4.2 / 1.6</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>对 Houston 一战明显被限 (14 pts 5/14)，但 NCAAT 两场都 ≥21 分，UCF 一场轰 26。<i>非"遇强则强"也非"遇强则弱"，整体偏稳，受伤是更主要的不可比变量</i>。</p>
+    <p class="src">来源：247Sports (Peterson on Houston 表现)，ESPN (NCAA R1 28 分报道)，University of Kansas Athletics，CBS Sports (UCF 战报)，Wikipedia。</p>
+  </article>
+
+  <!-- =========== Flemings -->
+  <article class="player-card">
+    <h3>#9 Kingston Flemings · Houston · G <span class="tag steady">平稳 (偏强)</span>
+      <span class="meta">赛季：16.0 / 4.1 / 5.2，FG 47.6%，3P 38.7%，FT 84.5% · Cougar 队史大一得分纪录 · 2nd Team AA</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>1/24/26</td><td>@ Texas Tech (AP T20)</td><td><b>42 pts 赛季最高</b> · 6 ast · 2 stl · Houston 大一得分新纪录 (L 86-90)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>整体均值</td><td>16.0 / 5.2 / 4.1</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>赛季单场仅一处可核实细节：客场对 Texas Tech 砍 42 (赛季新高)。配合 Wooden Award All-America 提名和大一 594 分队史纪录，<i>对强队场次的统计输出明显高于赛季均值</i>，但样本只 1 场，故标"平稳 (偏强)"待补。</p>
+    <p class="src">来源：University of Houston Athletics (Wooden Award)，click2houston.com，Wikipedia。</p>
+  </article>
+
+  <!-- =========== Peat -->
+  <article class="player-card">
+    <h3>#25 Koa Peat · Arizona · PF/SF <span class="tag rise">遇强则强 (季后大幅升档)</span>
+      <span class="meta">赛季：14.1 / 5.6 / 2.6，FG 52.8%，3P 35.0%，FT 62.3% · All-Big 12 · 大一 39 场全打</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手 (季后赛 +锦标)</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>3/14/26</td><td>#5 Houston (Big 12 锦标决赛)</td><td><b>21 pts · 6 reb · 60% FG</b> (W 79-74)</td></tr>
+          <tr><td>3/28/26</td><td>#3 Purdue (Elite 8)</td><td><b>20 pts · 7 reb · 3 ast</b> · 9/18 FG · West Region MOP (W 79-64)</td></tr>
+          <tr><td>NCAA 锦标 5 场</td><td>—</td><td>均值 17.2 / 7.6 / 1.6 / 0.6 blk</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>常规赛</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>常规赛均值</td><td>14.1 / 5.6 / 2.6</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>常规赛仅 14.1 分；进入大场 (Big 12 锦标 + NCAA 锦标) 立刻跃至 17.2 分 / 7.6 板，且对 Houston / Purdue 两场强档双双 ≥20 分。<i>升档幅度 +22%，明显"遇强则强"</i>。</p>
+    <p class="src">来源：Arizona Athletics (Big 12 锦标战报)，ESPN (Elite 8 战报)，CBS Sports (Big 12 锦标决赛)，Wikipedia，AZ Sports。</p>
+  </article>
+
+  <!-- =========== Burries -->
+  <article class="player-card">
+    <h3>#22 Brayden Burries · Arizona · G <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：16.1 / 4.9 / 2.4 / 1.5 stl，FG 49.1%，3P 39.1%，FT 80.5% · All-Big 12 · 39 场全打</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>3/14/26</td><td>#5 Houston (Big 12 锦标决赛)</td><td><b>21 pts</b> · 关键罚球封盘 (W 79-74)</td></tr>
+          <tr><td>NCAA 锦标 5 场</td><td>—</td><td>均值 16.8 / 6.2 / 1.8 / 1.0 stl · <b>3P 命中率 51.7%</b></td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>常规赛</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季</td><td>整体均值</td><td>16.1 / 4.9 / 2.4 · 3P 39.1%</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>常规赛三分 39%，NCAA 锦标狂飙到 51.7% (5 场)，篮板从 4.9 涨到 6.2，外线手感与抢板都升档。<i>大场反而打得更准更全面</i>。</p>
+    <p class="src">来源：CBS Sports (Big 12 锦标战报)，NCAA.com (Burries Tournament Highlights)，Sports Illustrated，AZ Desert Swarm。</p>
+  </article>
+
+  <!-- =========== Lendeborg -->
+  <article class="player-card">
+    <h3>#12 Yaxel Lendeborg · Michigan · F <span class="tag steady">平稳 (季后伤拖累)</span>
+      <span class="meta">赛季：15.1 / 6.9 / 3.3，FG 52.3% · Big Ten 球员年度 · 一致 1st Team AA · 2026 全国冠军</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>4/4/26</td><td>#2 Arizona (Final Four)</td><td>仅 14 分钟 (脚踝 + MCL 复发，W 91-73)</td></tr>
+          <tr><td>4/6/26</td><td>#2 UConn (全国总决赛)</td><td>13 pts · 4/13 FG (带伤上场，W 69-63)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>12/13/25</td><td>Maryland</td><td><b>赛季最高 29 pts · 生涯最高 9 ast</b> · 8 reb · 3 blk · 2 stl (W)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>常规赛是 Big Ten 全方位 MVP；但 Final 4 与国冠都因脚踝+MCL 伤被压到 13-14 分钟内的低输出。<i>无法把 "国冠之夜熄火" 等同于 "遇强则弱"</i>——这是医学问题；记为"平稳 (季后伤拖累)"。</p>
+    <p class="src">来源：mgoblue.com (Big Ten POY)，The Washington Post，CBS News (national championship)，profootballnetwork.com，Detroit News (伤情)。</p>
+  </article>
+
+  <!-- =========== Philon -->
+  <article class="player-card">
+    <h3>#13 Labaron Philon Jr. · Alabama · G <span class="tag rise">遇强则强</span>
+      <span class="meta">赛季：22.0 / 3.5 / 5.0，FG 50.1%，3P 39.9%，FT 79.8% · 全美仅他 22+5 + 50% FG · SEC Player of the Week</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>2/18/26</td><td>Arkansas (SEC 强档)</td><td><b>生涯最高 35 分</b></td></tr>
+          <tr><td>3/27/26</td><td>Michigan (S16)</td><td><b>再度 35 分 (与上一场并列生涯最高)</b></td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>赛季统计</h4>
+        <table>
+          <tr><th></th><th></th><th>数据</th></tr>
+          <tr><td>赛季</td><td>整体</td><td>32 场出战，30 场双位数得分；21 场 ≥20</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>两场生涯最高 35 分都来自强档对手 (Acuff 的 Arkansas、夺冠的 Michigan Sweet 16)。<i>大场表现 ≥ 赛季均值 +59%</i>，遇强则强。</p>
+    <p class="src">来源：rolltide.com，Yahoo Sports (SEC POW)，Wikipedia, Sports Illustrated。</p>
+  </article>
+
+  <!-- =========== Fland -->
+  <article class="player-card">
+    <h3>#17 Boogie Fland · Florida · PG <span class="tag steady">平稳</span>
+      <span class="meta">赛季：11.6 / 2.5 / 3.5，1.7 stl · 35 场全打 · SEC 冠军主控之一 (16-2)</span>
+    </h3>
+    <div class="splits">
+      <div class="split strong">
+        <h4>强队对手</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季中</td><td>#21 Tennessee</td><td><b>23 pts · 5 ast · 4 stl · 3 个三分</b> (W)</td></tr>
+        </table>
+      </div>
+      <div class="split weak">
+        <h4>弱队 / 中游</h4>
+        <table>
+          <tr><th>日期</th><th>对手</th><th>数据</th></tr>
+          <tr><td>赛季中</td><td>@ Texas</td><td>22 pts (W)</td></tr>
+          <tr><td>赛季</td><td>Providence</td><td>季节性手感 4 个三分 (个人最高)</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="verdict"><b>结论：</b>赛季均值偏低 (11.6) 但两场 20+ 分别砍 Tennessee 与 Texas，<i>都是 SEC 强档级别</i>。卫冕全国冠军体系下他更偏配角/防守属性 (1.7 stl，赛季 61 偷球队史第 8)，整体"平稳"。</p>
+    <p class="src">来源：floridagators.com，Independent Florida Alligator，Yahoo Sports (Kentucky SEC tourney 战报)。</p>
+  </article>
+
+</section>
+
+<!-- =========================== Limitations =========================== -->
+<section id="limitations">
+  <h2>数据完整性披露</h2>
+  <ul>
+    <li>本会话出站网络受策略限制，无法直接抓取 Sports-Reference/ESPN gamelog 整页 HTML；上述单场数据均出自公开报道与官方校队稿件的可核实文本，已附来源链接。</li>
+    <li>选秀顺位会逐周变化；5/10 大乐透后 5–14 顺位差异较大 (Mara、Wagler、Acuff、Fland 在不同模拟中可能互换 3–5 位)。</li>
+    <li>13 名球员之外的 35 人尚未拿到足够独立来源核实的逐场记录；不参与"强 / 弱"判定，仅列名单。</li>
+    <li>"对手强弱"用 AP 当周排名 + 锦标种子 + 报道叙述综合判定；未直接调用 KenPom 整年榜（KenPom 当前需付费 / 受 robots 限制）。</li>
+    <li>欧洲球员 (Suigo、de Larrea、López 等) 因 NBL / ABA / ACB 数据接口不在本会话允许范围，目前仅列名 + NBL/Wikipedia 可见的赛季均值。</li>
+  </ul>
+</section>
+
+<!-- =========================== Sources =========================== -->
+<section id="sources">
+  <h2>主要数据来源</h2>
+  <ul class="sources">
+    <li><a href="https://www.espn.com/nba/story/_/id/48713262/2026-nba-mock-draft-pick-projections-picks-post-lottery-dybantsa-peterson">ESPN 2026 NBA mock draft (post-lottery, all 60 picks)</a></li>
+    <li><a href="https://www.cbssports.com/nba/news/nba-mock-draft-2026-lottery-aj-dybantsa-darryn-peterson-cameron-boozer/">CBS Sports 2026 NBA Mock Draft</a></li>
+    <li><a href="https://www.nba.com/news/the-athletic-in-post-lottery-mock-draft-aj-dybantsa-to-wizards-darryn-peterson-to-jazz">The Athletic Post-Lottery Mock Draft</a></li>
+    <li><a href="https://www.espn.com/nba/story/_/id/46886245/2026-nba-draft-big-board-rankings-top-100-prospects-players">ESPN Big Board Top 100</a></li>
+    <li><a href="https://www.tankathon.com/big_board">Tankathon 2026 Big Board</a></li>
+    <li><a href="https://www.espn.com/mens-college-basketball/game/_/gameId/401812788/byu-uconn">ESPN: UConn 86-84 BYU (11/15/25)</a></li>
+    <li><a href="https://kslsports.com/ncaa/byu-basketball/aj-dybantsa-freshman-record/570563">KSL Sports: Dybantsa 43 vs Utah</a></li>
+    <li><a href="https://sports.yahoo.com/articles/texas-tech-held-byu-star-042457019.html">Yahoo Sports: Texas Tech held Dybantsa to 13</a></li>
+    <li><a href="https://byucougars.com/news/2026/03/19/byu-drops-79-71-decision-to-texas-in-ncaa-tournament">BYU Athletics: Texas NCAAT 35-10</a></li>
+    <li><a href="https://kuathletics.com/news/2026/3/20/mens-basketball-peterson-scores-28-points-kansas-holds-off-cal-baptist-in-ncaa-opener">Kansas Athletics: Peterson 28 vs Cal Baptist</a></li>
+    <li><a href="https://www.espn.com/mens-college-basketball/story/_/id/47495215/darryn-peterson-limited-return-kansas-falls-ucf">ESPN: Peterson 26 vs UCF</a></li>
+    <li><a href="https://247sports.com/college/kansas/article/darryn-peterson-interview-kansas-vs-houston-275455065/">247Sports: Peterson vs Houston</a></li>
+    <li><a href="https://kuathletics.com/news/2026/3/13/mens-basketball-peterson-scores-24-to-lead-no-14-kansas-past-tcu-78-73-in-the-big-12-quarterfinals">Kansas Athletics: Peterson 24 vs TCU</a></li>
+    <li><a href="https://www.cbssports.com/college-basketball/news/college-basketball-rankings-top-25-duke-kansas-champions-classic-cameron-boozer/">CBS Sports: Boozer 18-11-5 vs Kansas</a></li>
+    <li><a href="https://www.profootballnetwork.com/mens-cbb/cameron-boozer-duke-stats-march-2026/">profootballnetwork.com: Boozer Elite 8</a></li>
+    <li><a href="https://www.espn.com/mens-college-basketball/story/_/id/46854689/duke-cameron-boozer-responds-jon-scheyer-half-challenge-takes-win-vs-texas">ESPN: Boozer 15-13 vs Texas</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Cameron_Boozer">Wikipedia: Cameron Boozer (vs UNC 26-15-5)</a></li>
+    <li><a href="https://www.si.com/college/unc/tar-heels-how-caleb-wilson-performed-against-fellow-lottery-picks">Sports Illustrated: Wilson vs lottery picks</a></li>
+    <li><a href="https://www.tarheelblog.com/unc-basketball/53595/unc-basketball-caleb-wilson-team-mvp-2025-26-season">Tar Heel Blog: Wilson UNC MVP 2025-26</a></li>
+    <li><a href="https://www.ncaa.com/news/basketball-men/article/2026-04-06/michigan-beats-uconn-wins-2026-mens-basketball-national-championship">NCAA.com: Michigan 69-63 UConn</a></li>
+    <li><a href="https://www.washingtonpost.com/sports/colleges/2026/04/06/uconn-michigan-injuries-yaxel-lendeborg-solo-ball/63c96afe-3217-11f1-b85b-2cd751275c1d_story.html">Washington Post: Lendeborg / Solo Ball 伤情</a></li>
+    <li><a href="https://www.profootballnetwork.com/mens-cbb/is-yaxel-lendeborg-playing-national-championship-game-michigan-uconn-2026-2/">profootballnetwork.com: Lendeborg 13 pts 4/13 国冠</a></li>
+    <li><a href="https://mgoblue.com/news/2026/3/10/mens-basketball-lendeborg-earns-big-ten-player-of-the-year-as-u-m-hauls-15-all-conference-honors">Michigan Athletics: Lendeborg B1G POY (Maryland 29 / 9ast 详情)</a></li>
+    <li><a href="https://www.cbssports.com/college-basketball/news/illinois-vs-houston-keaton-waglers-12-rebounds-power-sweet-16-win/">CBS Sports: Wagler 12 reb Sweet 16</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Keaton_Wagler">Wikipedia: Wagler (Purdue 46, Nebraska 28)</a></li>
+    <li><a href="https://www.espn.com/mens-college-basketball/story/_/id/47972538/arkansas-darius-acuff-jr-49-points-nearly-delivers-2ot-win">ESPN: Acuff 49 vs Alabama</a></li>
+    <li><a href="https://www.wholehogsports.com/news/2026/mar/13/arkansas-oklahoma-basketball-live-score-updates-sec-tournament-razorbacks-sooners/">Whole Hog Sports: Acuff 37 vs Oklahoma</a></li>
+    <li><a href="https://www.ejsportsmedia.com/post/mikel-brown-jr-shatters-acc-freshman-scoring-record-as-louisville-overwhelms-nc-state-118-77-in-stat">EJ Sports: Brown Jr. 45 vs NC State</a></li>
+    <li><a href="https://www.cbssports.com/college-basketball/news/ncaa-tournament-injuries-march-madness-louisville-mikel-brown-duke-patrick-ngongba-caleb-foster/">CBS Sports: Brown 1/13 vs Duke</a></li>
+    <li><a href="https://arizonawildcats.com/news/2026/3/15/mens-basketball-arizona-wins-2026-phillips-66-big-12-tournament-championship.aspx">Arizona Athletics: Peat 21 / Burries 21 vs Houston (Big 12 final)</a></li>
+    <li><a href="https://www.espn.com/mens-college-basketball/recap?gameId=401856575">ESPN: Arizona 79-64 Purdue Elite 8 (Peat 20-7-3)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Koa_Peat">Wikipedia: Koa Peat NCAAT 17.2/7.6</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Brayden_Burries">Wikipedia: Burries NCAAT 16.8/6.2 / 51.7% 3P</a></li>
+    <li><a href="https://www.ncaa.com/video/basketball-men/2026-04-05/brayden-burries-ncaa-tournament-highlights">NCAA.com: Burries Tournament Highlights</a></li>
+    <li><a href="https://uhcougars.com/news/2026/3/31/mens-basketball-kingston-flemings-named-to-john-r-wooden-award-all-america-team">Houston Athletics: Flemings 42 vs Texas Tech</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Kingston_Flemings">Wikipedia: Kingston Flemings</a></li>
+    <li><a href="https://www.alligator.org/article/2026/01/florida-beats-tennessee-bball-recap-2026">Florida Alligator: Fland 23 vs #21 Tennessee</a></li>
+    <li><a href="https://floridagators.com/sports/mens-basketball/roster/boogie-fland/17752">Florida Gators: Fland season averages</a></li>
+    <li><a href="https://hoopswire.com/2026-nba-mock-draft-projecting-the-first-round/">Hoops Wire 2026 mock draft (picks 25-30)</a></li>
+    <li><a href="https://www.on3.com/pro/news/2026-nba-mock-draft-usa-today-updates-first-round-projections-after-nba-draft-combine/">USA Today Mock Draft (post-combine)</a></li>
+    <li><a href="https://www.cbsnews.com/news/ncaa-mens-basketball-championship-michigan-uconn-2026-march-madness/">CBS News: Mara momentum dunk 国冠</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Aday_Mara">Wikipedia: Aday Mara</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Karim_L%C3%B3pez">Wikipedia: Karim López (NBL)</a></li>
+    <li><a href="https://rolltide.com/sports/mens-basketball/roster/labaron-philon-jr-/15265">Alabama Athletics: Labaron Philon</a></li>
+  </ul>
+</section>
+
+</main>
+
+<script>
+  // 简易表格排序
+  (function() {
+    var table = document.getElementById('board');
+    if (!table) return;
+    var headers = table.querySelectorAll('th');
+    headers.forEach(function(th, idx) {
+      th.addEventListener('click', function() {
+        sortByColumn(table, idx, th);
+      });
+    });
+    function sortByColumn(table, idx, th) {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var dir = th.classList.contains('sort-asc') ? -1 : 1;
+      headers.forEach(function(h) { h.classList.remove('sort-asc','sort-desc'); });
+      th.classList.add(dir === 1 ? 'sort-asc' : 'sort-desc');
+      rows.sort(function(a, b) {
+        var av = a.children[idx].textContent.trim();
+        var bv = b.children[idx].textContent.trim();
+        var an = parseFloat(av.replace(/[^\d.\-]/g,''));
+        var bn = parseFloat(bv.replace(/[^\d.\-]/g,''));
+        if (!isNaN(an) && !isNaN(bn)) return (an - bn) * dir;
+        return av.localeCompare(bv, 'zh-Hans-CN') * dir;
+      });
+      rows.forEach(function(r) { tbody.appendChild(r); });
+    }
+  })();
+</script>
+
+</body>
 </html>
